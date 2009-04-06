@@ -1,0 +1,27 @@
+{% extends 'questions_base.html' %}
+
+{% block main %}	
+	<form action="/question/new/" method="post">
+
+		<fieldset>
+		  <legend>What do you want to know?</legend>
+		  <ul>
+		    <li>
+		      <label for="question">Question</label> 
+					{{ form.title }}
+		    </li>
+		    <li>
+		      <label for="body">&nbsp;</label> 
+					{{ form.body }}
+		    </li>
+		    <li>
+		      <label for="tags">Tags</label> 
+					{{ form.tags }}
+		    </li>
+				<input type="hidden" name="author" id="id_author" value="{{ request.user.id }}" />
+				<li><input type="submit" value="Submit" /></li>
+		  </ul>
+		</fieldset>
+
+	</form>
+{% endblock %}

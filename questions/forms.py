@@ -4,4 +4,3 @@ from models import Question
 class QuestionForm(ModelForm):
     class Meta:
         model = Question
-

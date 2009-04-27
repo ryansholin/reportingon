@@ -1,0 +1,61 @@
+/* Eric's CSS reset (http://meyerweb.com/eric/thoughts/2007/05/01/reset-reloaded/) */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline;}
+body {line-height: 1; color: black; background: white;}
+ol, ul {list-style: none;}
+table {border-collapse: separate; border-spacing: 0;}
+caption, th, td {text-align: left; font-weight: normal;}
+blockquote:before, blockquote:after, q:before, q:after {content: "";}
+blockquote, q {quotes: "" "";}
+
+/* Clearfix (http://www.positioniseverything.net/easyclearing.html) */
+
+.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.clearfix {display: inline-block;}
+/* \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* */
+
+/* Generic */
+
+.left {float: left;}
+.right {float: right;}
+em {font-style: italic;}
+strong {font-weight: bold;}
+
+/* General structure */
+
+body {color: #3E3E3E; font: 14px Helvetica, Arial, Sans-Serif;}
+body a {color: #07A4E7; text-decoration: none;}
+body a:hover {text-decoration: underline;}
+.frame {margin: 0 auto; width: 950px;}
+
+/* Header */
+
+#header {background-color: #EAEAEA;}
+#header .right {text-align: right;}
+#logo {margin: 35px 0;}
+#user-tag {font-size: 14px; margin-top: 13px;}
+
+/* Search */
+
+#search input {
+    border: 1px solid #ACACAC;
+    border-radius: 5px;
+    border-bottom: 0;
+    border-right: 0;
+    color: #878787;
+    font: bold 20px Helvetica, Arial, Sans-Serif;
+    margin-top: 13px;
+    padding: 12px;
+    width: 291px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+/* Footer */
+
+#footer {background-color: #EAEAEA;}
+#footer-nav {border-left: 5px solid #CFCFCF; font-weight: bold; margin-left: 20px;}
+#footer-nav a {display: block; padding: 3px 0 3px 20px;}

@@ -56,6 +56,13 @@ body a:hover {text-decoration: underline;}
 
 /* Footer */
 
-#footer {background-color: #EAEAEA;}
-#footer-nav {border-left: 5px solid #CFCFCF; font-weight: bold; margin-left: 20px;}
-#footer-nav a {display: block; padding: 3px 0 3px 20px;}
+#footer {background-color: #EAEAEA; padding: 25px 0;}
+#footer-colophon {color: #B2B2B2; font-size: 18px; font-weight: bold; line-height: 25px; margin-top: 4px; width: 460px;}
+#footer-cc-logo {margin-top: 11px;}
+#footer-logo {margin-top: 18px;}
+#footer-nav {border-left: 5px solid #CFCFCF; font-weight: bold; margin-left: 20px; padding: 2px 0;}
+#footer-nav a {display: block; padding: 2px 0 2px 20px;}
+
+/* Content */
+
+#content {padding: 15px 0;}

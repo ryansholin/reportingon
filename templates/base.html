@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Language" content="en">
 
 {% block css %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}style.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}style.css" type="text/css" media="screen" charset="utf-8">
 {% endblock %}
 {% if debug %}
     <script type="text/javascript" src="{{ MEDIA_URL }}jquery.js"></script>
@@ -27,19 +27,52 @@
 
 <body{% block body_styles %}{% endblock %}>
 
-<div id="header">
-    <div class="left">
-        <a href="/" title="ReportingOn - Home"><img src="{{ MEDIA_URL }}images/logo.png" alt="ReportingOn - Home" title="ReportingOn - Home"></a>
-    </div>
-    <div class="right">
-        
+<div id="header" class="clearfix">
+    <div class="content frame">
+        <div class="left">
+            <a href="/" title="ReportingOn - Home"><img id="logo" src="{{ MEDIA_URL }}images/logo.gif" alt="ReportingOn - Home" title="ReportingOn - Home"></a>
+        </div>
+        <div class="right">
+            <div id="user-tag">
+                <a href="/login">Login</a> or <a href="/sign-up">Sign Up</a>
+            </div>
+            <div id="search">
+                <form id="search-form" action="/search" method="post">
+                    <div id="search-field">
+                        <input type="text" name="query" value="Search...">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <div id="content" class="frame">
     {% block content %}Content{% endblock %}
 </div>
-<div id="footer">
-    Footer
+<div id="footer" class="clearfix">
+    <div class="content frame">
+        <div class="left">
+            <div class="left" id="footer-logo">
+                <a href="/" title="ReportingOn - Home"><img id="logo-footer" src="{{ MEDIA_URL }}images/logo-footer.gif" alt="ReportingOn - Home" title="ReportingOn - Home"></a>
+            </div>
+            <ul class="left" id="footer-nav">
+                <li><a href="/about">About</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="http://feedback.reportingon.com">Feedback</a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="left">
+                ReportingOn is a Knight News Challenge project<br>
+                spearheaded by Ryan Sholin with the help of the<br>
+                Lion Burger crew. It’s open source.
+            </div>
+            <div class="right">
+                <a href="CC" title="cC"><img src="{{ MEDIA_URL }}images/cc-logo-footer.gif" alt="cc" title="ReportingOn - Home"></a>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% if not debug %}

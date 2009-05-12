@@ -58,6 +58,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.request',
+    'django_authopenid.context_processors.authopenid',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -71,6 +72,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_authopenid.middleware.OpenIDMiddleware',
 )
 
 ROOT_URLCONF = 'reportingon.urls'
@@ -83,8 +85,6 @@ COMPRESS_VERSION = True
 COMPRESS_CSS = {'all': {'source_filenames': ('style.css',), 'output_filename': 'ro.r?.css'}}
 COMPRESS_JS =  {'all': {'source_filenames': ('jquery.js', 'script.js',), 'output_filename': 'ro.r?.js'}}
 
-LOGIN_REDIRECT_URL = '/'
-
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -92,6 +92,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'compress',
+    'registration',
+    'django_authopenid',
 )
 
 try:

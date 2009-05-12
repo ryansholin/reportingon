@@ -79,12 +79,17 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
 )
 
+COMPRESS_VERSION = True
+COMPRESS_CSS = {'all': {'source_filenames': ('style.css',), 'output_filename': 'ro.r?.css'}}
+COMPRESS_JS =  {'all': {'source_filenames': ('jquery.js', 'script.js',), 'output_filename': 'ro.r?.js'}}
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'compress',
 )
 
 try:

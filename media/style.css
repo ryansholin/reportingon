@@ -26,7 +26,7 @@ strong {font-weight: bold;}
 
 /* General structure */
 
-body {color: #3E3E3E; font: 14px Helvetica, Arial, Sans-Serif;}
+body {color: #3E3E3E; font: 14px "Helvetica Neue", Helvetica, Arial, Sans-Serif;}
 body a {color: #07A4E7; text-decoration: none;}
 body a:hover {text-decoration: underline;}
 .frame {margin: 0 auto; width: 950px;}
@@ -36,7 +36,57 @@ body a:hover {text-decoration: underline;}
 #header {background-color: #EAEAEA;}
 #header .right {text-align: right;}
 #logo {margin: 35px 0;}
-#user-tag {font-size: 14px; margin-top: 13px;}
+#user-tag {
+    border: 1px solid transparent;
+    float: right;
+    font-size: 14px;
+    margin-top: 7px;
+    padding-top: 5px;
+    position: relative;
+    width: 220px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+#user-tag.enabled {
+    border: 1px solid #CECECE;
+    background-color: #FFF;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+#user-options-arrow {
+    background-color: #FFF;
+    border: 1px solid #CECECE;
+    display: block;
+    float: right;
+    margin-left: 8px;
+    padding: 7px 5px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+#user-tag.enabled #user-options-arrow {border-color: transparent;}
+#user-options-list {
+    background-color: #FFF;
+    border: 1px solid #CECECE;
+    border-top: 0;
+    display: none;
+    padding: 10px;
+    position: absolute;
+    right: -1px;
+    top: 25px;
+    width: 200px;
+    border-radius: 3px;
+    border-radius-top-right: 0;
+    -moz-border-radius: 3px;
+    -moz-border-radius-topright: 0;
+    -webkit-border-radius: 3px;
+    -webkit-border-top-right-radius: 0;
+}
+#user-tag.enabled #user-options-list {display: block;}
+#user-options-list a {display: block;}
+#user-username {float: right; margin-top: 1px;}
 
 /* Search */
 

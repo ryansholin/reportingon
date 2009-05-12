@@ -3,25 +3,18 @@
 <html>
 <head>
 
-<title>{% block title %}ReportingOn - The backchannel for your beat.{% endblock %}</title>
+    {% load compressed %}
+    
+    <title>{% block title %}ReportingOn - The backchannel for your beat.{% endblock %}</title>
 
-<meta name="keywords" content="reportingon">
-<meta name="description" content="ReportingOn - The backchannel for your beat.">
-<meta name="language" content="en">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Language" content="en">
+    <meta name="keywords" content="reportingon">
+    <meta name="description" content="ReportingOn - The backchannel for your beat.">
+    <meta name="language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en">
 
-{% block css %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}style.css" type="text/css" media="screen" charset="utf-8">
-{% endblock %}
-{% if debug %}
-    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.js"></script>
-{% endif %}
-{% if not debug %}
-    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
-    <script type="text/javascript">google.load('jquery', '1.3')</script>
-{% endif %}
-<script type="text/javascript" src="{{ MEDIA_URL }}script.js"></script>
+    {% compressed_css 'all' %}
+    {% compressed_js  'all' %}
 
 </head>
 

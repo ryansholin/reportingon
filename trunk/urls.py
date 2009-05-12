@@ -6,8 +6,8 @@ from reportingon.views import *
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^user/', include('django_authopenid.urls')),
     (r'^admin/(.*)', admin.site.root),
-    (r'^account/', include('django_authopenid.urls')),
     (r'^/?$', home),
 )
 

@@ -7,4 +7,10 @@ $(function() {
             if ($(this).attr('value') == '') {$(this).attr('value','Search...')}
         });
     }
+    if ($("#user-options").length) {
+        $("#user-options").hover(
+            function() {$("#user-tag").addClass('enabled');},
+            function() {$("#user-tag").removeClass('enabled')}
+        )
+    }
 });

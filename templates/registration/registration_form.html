@@ -1,31 +1,40 @@
 {% extends "base.html" %}
-{% load i18n %}
-
-{% block head %}
-
-
-{% endblock %}
-
 
 {% block content %}
-{% if form.errors %}
-    <div class="errors">
-        <p>Error while submitting form</p>
-        
+
+<div id="login-page" class="clearfix">    
+    <div class="left login-account">
+        <form id="reg_form" name="reg_form" action="{% url registration_register %}" method="post">
+            <div class="fields">
+                <fieldset>
+        	        <legend>Account Signup</legend>
+        	        {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors }}</div>{% endif %}
+        	        {% if form.errors.username %}<div class="error">{{ form.errors.username }}</div>{% endif %}
+        	        <div class="field"><label for="id_username">Username</label>{{ form.username }}</div>
+        	        {% if form.errors.email %}<div class="error">{{ form.errors.email }}</div>{% endif %}
+            	    <div class="field"><label for="id_email">Email</label>{{ form.email }}</div>
+            	    {% if form.errors.password1 %}<div class="error">{{ form.errors.password1 }}</div>{% endif %}
+            	    <div class="field"><label for="id_password1">Password</label>{{ form.password1 }}</div>
+            	    {% if form.errors.password2 %}<div class="error">{{ form.errors.password2 }}</div>{% endif %}
+            	    <div class="field"><label for="id_password2">Confirm</label>{{ form.password2 }}</div>
+            	 </fieldset>
+            	 <input type="submit" name="bsignup'" value="Sign up" class="submit right">
+            </div>
+        </form>
     </div>
-    <br>
-{% endif %}
+    <div class="left login-openid">
+        <form id="openid_form" name="openid_form" action="{% url user_signin %}" method="post">
+            <div class="fields">
+        	    <fieldset>
+            		<legend>OpenID Signup</legend>
+                    <div class="field"><label for="id_openid_url"><img id="openid-badge" src="{{ MEDIA_URL}}images/openid.gif" alt="OpenID URL" title="OpenID URL">URL</label><input id="id_openid_url" type="text" class="required openid" name="openid_url" maxlength="255"></div>
+                    <input type="hidden" name="action" value="verify">
+                    <input type="hidden" name="next" value="">
+            	</fieldset>
+            	<input name="openid_submit" type="submit" value="Sign in" class="submit right">
+            </div>
+        </form>
+    </div>
+</div>
 
-<h2>Make a choice:</h2>
-<p> <a href="{% url registration_register %}">Register</a> | <a href="{% url user_signin %}">Log-In</a></p>
-
-<form action="" method="post">
-    <fieldset>
-	    <legend>{% trans "Sign In Using Your Account ID" %}</legend>
-	    <table>
-		    {{ form.as_table }}
-	    </table>
-	    <p><input type="submit" name="bsignup'" value="{% trans "Sign up" %}"> </p>
-	 </fieldset>
-</form>
 {% endblock %}

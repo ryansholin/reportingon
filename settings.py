@@ -87,6 +87,8 @@ COMPRESS_JS =  {'all': {'source_filenames': ('jquery.js', 'script.js',), 'output
 
 LOGIN_REDIRECT_URL = '/'
 
+ACCOUNT_ACTIVATION_DAYS = 999999
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',

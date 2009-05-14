@@ -34,15 +34,24 @@ fieldset input, #search input {
     -webkit-border-radius: 5px;
 }
 fieldset input {background-color: #F0F0F0; border-color: #A6A6A6; color: #3D3D3D; padding: 5px;}
+fieldset .info {color: #878787; line-height: 18px; margin-bottom: 25px; width: 289px;}
 legend {color: #3d3d3d; font-size: 24px; font-weight: bold; padding-bottom: 25px;}
 label {color: #9b9b9b; float: left; font-size: 18px; font-weight: bold; width: 115px;}
+div.success {
+    background-color: #FDFDE0;
+    color: #4D921D;
+    font-weight: bold;
+    line-height: 21px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
 div.error {
     background-color: #FDFDE0;
     color: #B42036;
     font-weight: bold;
-    margin: 5px 0;
-    padding: 5px;
-    width: 279px;
+    margin: 10px 0;
+    padding: 10px;
+    width: 269px;
 }
 div.error a {color: #B42036; text-decoration: underline;}
 
@@ -52,6 +61,9 @@ body a {color: #07A4E7; text-decoration: none;}
 body a:hover {text-decoration: underline;}
 .frame {margin: 0 auto; width: 950px;}
 
+/* Generic styles */
+.page-message {color: #3d3d3d; font-size: 24px; font-weight: bold; margin: 50px auto; width: 475px;}
+
 /* Header */
 #header {background-color: #EAEAEA;}
 #header .right {text-align: right;}
@@ -60,6 +72,7 @@ body a:hover {text-decoration: underline;}
     border: 1px solid transparent;
     float: right;
     font-size: 14px;
+    height: 21px;
     margin-top: 7px;
     padding-top: 5px;
     position: relative;

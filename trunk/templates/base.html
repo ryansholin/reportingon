@@ -34,6 +34,7 @@
                         <div id="user-username">I am <a href="/user/{{ request.user.username }}">{{ request.user.username }}</a></div>
                         <ul id="user-options-list">
                             <li><a href="/user/{{ request.user.username }}">My profile</a></li>
+                            {% if user.is_superuser %}<li><a href="/admin">Administration</a></li>{% endif %}
                             <li><a href="/user/signout">Logout</a></li>
                         </ul>
                     </div>

@@ -1,1 +1,1 @@
-{{ site }}. Confirm your registration
+Activate your {{ site.name }} account.

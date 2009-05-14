@@ -7,7 +7,7 @@
         <form id="reg_form" name="reg_form" action="{% url registration_register %}" method="post">
             <div class="fields">
                 <fieldset>
-        	        <legend>Account Signup</legend>
+        	        <legend>Account signup</legend>
         	        {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors }}</div>{% endif %}
         	        {% if form.errors.username %}<div class="error">{{ form.errors.username }}</div>{% endif %}
         	        <div class="field"><label for="id_username">Username</label>{{ form.username }}</div>
@@ -18,7 +18,7 @@
             	    {% if form.errors.password2 %}<div class="error">{{ form.errors.password2 }}</div>{% endif %}
             	    <div class="field"><label for="id_password2">Confirm</label>{{ form.password2 }}</div>
             	 </fieldset>
-            	 <input type="submit" name="bsignup'" value="Sign up" class="submit right">
+            	 <input type="submit" name="bsignup'" value="Let's do this" class="submit right">
             </div>
         </form>
     </div>
@@ -26,12 +26,12 @@
         <form id="openid_form" name="openid_form" action="{% url user_signin %}" method="post">
             <div class="fields">
         	    <fieldset>
-            		<legend>OpenID Signup</legend>
+            		<legend>OpenID signup</legend>
                     <div class="field"><label for="id_openid_url"><img id="openid-badge" src="{{ MEDIA_URL}}images/openid.gif" alt="OpenID URL" title="OpenID URL">URL</label><input id="id_openid_url" type="text" class="required openid" name="openid_url" maxlength="255"></div>
                     <input type="hidden" name="action" value="verify">
                     <input type="hidden" name="next" value="">
             	</fieldset>
-            	<input name="openid_submit" type="submit" value="Sign in" class="submit right">
+            	<input name="openid_submit" type="submit" value="Let's do this" class="submit right">
             </div>
         </form>
     </div>

@@ -1,5 +1,9 @@
-Hi,
+Hey there,
 
-Thank you for your registration. To activate your account lick on the link below :
+Activate your {{ site.name }} account by clicking the following link:
 
-<a href="{% url registration_activate activation_key %}">{% url registration_activate activation_key %}</a>.
+http://reportingon.com{% url registration_activate activation_key %}
+
+Thanks,
+
+The {{ site.name }} team

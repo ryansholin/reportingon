@@ -7,13 +7,13 @@
         <form id="auth_form" name="auth_form" action="{% url user_signin %}" method="post">
             <div class="fields">
                 <fieldset>
-            		<legend>Account Login</legend>
-            		{% if form2.errors %}<div class="error">Incorrect username or password.<br><a href="/user/forgot-password">Forgot password?</a></div>{% endif %}
+            		<legend>Account login</legend>
+            		{% if form2.errors %}<div class="error">Incorrect username or password.<br><a href="/user/password/reset">Forgot password?</a></div>{% endif %}
             		<div class="field"><label for="id_username">Username</label>{{ form2.username }}</div>
             		<div class="field"><label for="id_password">Password</label>{{ form2.password }}</div>
             		<input type="hidden" name="next" value="{{ next }}">
             	</fieldset>
-            	<input type="submit" name="blogin" value="Sign in" class="submit right">
+            	<input type="submit" name="blogin" value="Let me in" class="submit right">
             </div>
         </form>
     </div>
@@ -21,14 +21,14 @@
         <form id="openid_form" name="openid_form" action="{% url user_signin %}" method="post">
             <div class="fields">
         	    <fieldset>
-            		<legend>OpenID Login</legend>
+            		<legend>OpenID login</legend>
             		{% if msg %}<div class="error">{{ msg }}</div>{% endif %}
             		{% if form1.errors %}<div class="error">{{ form1.openid_url.errors|join:", " }}</div>{% endif %}
                     <div class="field"><label for="id_openid_url"><img id="openid-badge" src="{{ MEDIA_URL}}images/openid.gif" alt="OpenID URL" title="OpenID URL">URL</label>{{ form1.openid_url }}</div>
                     <input type="hidden" name="action" value="verify">
                     <input type="hidden" name="next" value="{{ next }}">
             	</fieldset>
-            	<input name="openid_submit" type="submit" value="Sign in" class="submit right">
+            	<input name="openid_submit" type="submit" value="Let me in" class="submit right">
             </div>
         </form>
     </div>

@@ -8,7 +8,7 @@
             <div class="fields">
                 <fieldset>
             		<legend>Account login</legend>
-            		{% if form2.errors %}<div class="error">Incorrect username or password.<br><a href="/user/password/reset">Forgot password?</a></div>{% endif %}
+            		{% if form2.errors %}<div class="error">Incorrect username or password.<br><a href="/user/password/reset">Forget password?</a></div>{% endif %}
             		<div class="field"><label for="id_username">Username</label>{{ form2.username }}</div>
             		<div class="field"><label for="id_password">Password</label>{{ form2.password }}</div>
             		<input type="hidden" name="next" value="{{ next }}">

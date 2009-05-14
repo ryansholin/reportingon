@@ -1,1 +1,5 @@
-Thank you to join {{ site }}.
+Hey there,
+
+Thanks for joining {{ site.name }}. Hope you enjoy your stay.
+
+The {{ site.name }} team

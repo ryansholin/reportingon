@@ -1,13 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-  "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <title>OpenID failed</title>
-</head>
-<body>
-<h1>OpenID failed</h1>
+{% extends "base.html" %}
 
-<p>{{ message|escape }}</p>
+{% block content %}
 
-</body>
-</html>
+<div class="clearfix page-message">
+    <p>OpenID failed. Not sure what happened, really. <a href="http://feedback.reportingon.com">Tell us</a></p>
+</div>
+
+{% endblock %}

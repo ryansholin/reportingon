@@ -85,6 +85,7 @@ COMPRESS_VERSION = True
 COMPRESS_CSS = {'all': {'source_filenames': ('style.css',), 'output_filename': 'ro.r?.css'}}
 COMPRESS_JS =  {'all': {'source_filenames': ('jquery.js', 'script.js',), 'output_filename': 'ro.r?.js'}}
 
+LOGIN_URL = '/user/signin'
 LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_ACTIVATION_DAYS = 999999

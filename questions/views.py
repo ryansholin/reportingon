@@ -29,7 +29,8 @@ def create_question(request):
 
 def update_question(request, qid):
     if(request.POST):
-        form = QuestionForm(request.POST)
+        question = Question.objects.get(id__exact=qid)
+        form = QuestionForm(request.POST, instance=question)
         if form.is_valid():
             question = form.save()
             return HttpResponseRedirect(reverse(question_view, args=[question.pk]))

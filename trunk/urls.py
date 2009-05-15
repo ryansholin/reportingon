@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^user/', include('django_authopenid.urls')),
-    (r'^questions/', include('questions.urls')),
+    (r'^questions/', include('reportingon.questions.urls')),
     (r'^admin/(.*)', admin.site.root),
     (r'^/?$', home),
 )

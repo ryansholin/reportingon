@@ -1,9 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block main %}
-<p>You're in the questions base template.</p>
-<ul>
-	<li><a href="/">Home</li>
-	<li><a href="/question/new">Create a question</a></li>
-</ul>
+{% block title %}Questions | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <a href="/questions/new">Create a question</a>
+    <h1>Questions:</h1>
+    <ul>
+        {% for question in questions %}
+            <li><a href="/questions/{{ question.id }}">{{ question.question }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

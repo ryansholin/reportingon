@@ -96,9 +96,11 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'compress',
-    'registration',
     'django_authopenid',
+    'registration',
+    'questions',
+    'compress',
+    'tagging',
 )
 
 try:

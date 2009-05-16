@@ -1,12 +1,39 @@
 {% extends "base.html" %}
 
+{% load comments %}
+
 {% block title %}Question | {{ block.super }}{% endblock %}
 
 {% block content %}
     <a href="/questions">&laquo; All questions</a><br>
-    <a href="/questions/new">Create a question</a>
-    <h1>Question:</h1>
-    {{ question }}<br>
+    <a href="/questions/new">Create a question</a><br><br>
+    <h1>Question:</h1><br>
+    {{ question }}<br><br><br>
+    Answers ({% get_comment_count for question as comment_count %}{{ comment_count }}):<br>
+    <ul>
+        {% get_comment_list for question as comment_list %}
+        {% for comment in comment_list %}
+        <li style="list-style-type: disc; margin-left: 20px;">{{ comment.comment }} [<a href="/answers/edit/{{ comment.id }}">edit</a>] [<a href="/answers/delete/{{ comment.id }}">delete</a>]</li>
+        {% endfor %}
+    </ul>
+    {% get_comment_form for question as form %}
+    <form action="/answers/post/" method="post">
+        <div style="display: none;">
+            <label for="id_name">Name</label> <input id="id_name" type="text" name="name" maxlength="50" value="Guest"><br>
+            <label for="id_email">Email address</label> <input type="text" name="email" id="id_email" value="null@null.com"><br>
+            <label for="id_url">URL</label> <input type="text" name="url" id="id_url" value="http://null.com"><br>
+        </div>
+        <label for="id_comment">Answer</label> <br>
+        {{ form.comment }}
+        <div style="display: none;"><label for="id_honeypot">If you enter anything in this field your comment will be treated as spam</label> {{ form.honeypot }}</div>
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <input type="hidden" name="next" value="{{ question.get_absolute_url }}">
+        <input type="submit" name="post" class="submit-post" value="Post">
+    </form>
+    <br><br><br>
     <a href="/questions/update/{{ question.id }}">Edit question</a><br>
     <a href="/questions/delete/{{ question.id }}">Delete question</a>
 {% endblock %}

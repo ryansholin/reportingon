@@ -33,6 +33,5 @@ class Question(models.Model):
     def __unicode__(self):
         return u'%s' % self.question
     
-    @permalink 
     def get_absolute_url(self): 
-        return ('question_view', None, {'slug': self.slug})
+        return "/questions/%d" % self.id

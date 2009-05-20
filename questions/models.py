@@ -9,6 +9,8 @@ import tagging
 from tagging.fields import TagField
 from tagging.models import Tag
 
+from djangosphinx import SphinxSearch
+
 class Question(models.Model):
     """Question model"""
     
@@ -35,3 +37,12 @@ class Question(models.Model):
     
     def get_absolute_url(self): 
         return "/questions/%d" % self.id
+        
+    search = SphinxSearch(
+            index ='questions_question', 
+            weights = { # individual field weighting
+                'question': 100,
+                'tags': 80,
+                'author': 40,
+            }
+        )

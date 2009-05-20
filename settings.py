@@ -98,14 +98,17 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.comments',
     'django_authopenid',
+    'reportingon.questions',
     'registration',
     'compress',
     'tagging',
-    
-    'reportingon.questions',
+    'djangosphinx',
 )
 
+# Sphinx 0.9.8
+SPHINX_API_VERSION = 0x113
+
 try:
-    from reportingon.private.settings import *
+    from private.settings import *
 except ImportError:
     pass

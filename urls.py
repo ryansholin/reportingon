@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^answers/', include('django.contrib.comments.urls')),
     (r'^answers/edit/(?P<aid>\d+)/$', edit_answer),
     (r'^admin/(.*)', admin.site.root),
+    (r'^search/(.*)', search_results),
     (r'^/?$', home),
 )
 

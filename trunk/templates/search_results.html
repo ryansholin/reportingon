@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+	<form action="/search/" method="GET">
+		<input type="text" name="query"/>
+		<input type="submit">
+	</form>
+	
+	{% if results %}
+		<p>Your search for &ldquo;<strong>{{ query }}</strong>&rdquo; had <strong>{{ search_meta.total_found }}</strong> results.</p>
+		<p>search_meta object dump: {{ search_meta }}</p>
+	{% endif %}
+	<hr/>
+	{% for r in results %}
+			<h3><a href="{{ r.get_absolute_url }}">{{ r.title }}</a></h3>
+			<p>(weight: {{ r.sphinx.weight }})</p>
+			<p>story.sphinx object dump: {{ r.sphinx }}</p>
+	{% empty %}
+		<p>YOU HAVEN'T SEARCHED YET.</p>
+	{% endfor %}
+</div>
+
+{% endblock %}

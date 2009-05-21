@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Home | {{ block.super }}{% endblock %}
+
+{% block content %}
+    This is the homepage, and you're not <a href="{% url user_signin %}">logged in</a>. We haven't gotten that far, yet.<br><br>
+    Until we do something, you can <a href="{% url questions.views.list_questions %}">browse questions</a>.
+{% endblock %}

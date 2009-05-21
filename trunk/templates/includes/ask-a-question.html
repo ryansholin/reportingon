@@ -1,0 +1,1 @@
+<a href="{% url questions.views.new_question %}" id="new-question">Ask a question{% ifequal request.path '/questions/new' %}<img id="selector-active-arrow" src="{{ MEDIA_URL }}images/selector-active-arrow.png" alt="" title="">{% endifequal %}</a>

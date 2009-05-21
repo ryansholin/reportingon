@@ -6,12 +6,12 @@ from reportingon.views import *
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^user/', include('django_authopenid.urls')),
     (r'^questions/', include('reportingon.questions.urls')),
     (r'^answers/', include('django.contrib.comments.urls')),
-    (r'^answers/edit/(?P<aid>\d+)/$', edit_answer),
+    (r'^user/', include('django_authopenid.urls')),
+    (r'^users/(.*)', user),
     (r'^admin/(.*)', admin.site.root),
-    (r'^search/(.*)', search_results),
+    (r'^search/(.*)', search),
     (r'^/?$', home),
 )
 

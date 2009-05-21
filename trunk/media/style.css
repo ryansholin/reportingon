@@ -146,4 +146,56 @@ body a:hover {text-decoration: underline;}
 #footer-nav a {display: block; padding: 2px 0 2px 20px;}
 
 /* Content */
-#content {padding: 15px 0;}
+#content {padding: 10px 0;}
+#content-left {float: left; width: 635px;}
+#content-right {float: left; width: 315px;}
+#content-selector li {display: inline;}
+#content-selector li a, #new-question {
+    background-color: #E5E5E5;
+    border-radius: 5px;
+    color: #898989;
+    display: block;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    height: 39px;
+    margin-right: 10px;
+    padding-top: 10px;
+    text-align: center;
+    width: 202px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+#content-selector li a:hover {color: #3D3D3D; text-decoration: none;}
+#content-selector li.last a {margin-right: 0; width: 201px;}
+#content-selector li.active a, #new-question {background-color: #3D3D3D; color: #FFF; position: relative;}
+#new-question {background: #3D3D3D url('/media/images/new-question-icon.png') 49px center no-repeat; padding-left: 47px; width: 268px;}
+#new-question:hover {text-decoration: none;}
+#main-content {margin-top: 10px;}
+#selector-active-arrow {position: absolute; top: 49px; left: 50%;}
+
+/* Questions */
+#question-list .question {border-top: 1px solid #E5E5E5; padding: 15px 0; width: 625px;}
+#question-list .question .avatar {width: 85px;}
+#question-list .question .meta {width: 540px;}
+#question-list .question .title {color: #3e3e3e; font-size: 21px; font-weight: bold; text-decoration: none;}
+#question-list .question .title:hover {color: #49B2E8;}
+#question-list .question .answers {color: #c6c6c6;}
+#question-list .question .tools {clear: left; margin-top: 10px;}
+#question-list .question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px;}
+#question-list .question .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px;}
+#question-list .question .good-question {
+    background: #E5E5E5 url('/media/images/plus.gif') 5px center no-repeat;
+    border-radius: 3px;
+    color: #9b9b9b;
+    display: block;
+    font-family: "Arial Rounded MT Bold", Arial;
+    font-size: 10px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    padding: 5px;
+    padding-left: 19px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+#question-list .question .good-question:hover {color: #49B2E8; text-decoration: none;}

@@ -17,8 +17,6 @@
 			<h3><a href="{{ r.get_absolute_url }}">{{ r.title }}</a></h3>
 			<p>(weight: {{ r.sphinx.weight }})</p>
 			<p>story.sphinx object dump: {{ r.sphinx }}</p>
-	{% empty %}
-		<p>YOU HAVEN'T SEARCHED YET.</p>
 	{% endfor %}
 </div>
 

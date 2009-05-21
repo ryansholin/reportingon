@@ -33,7 +33,7 @@
                         <span id="user-options-arrow"><img class="left" src="{{ MEDIA_URL }}images/user-options-arrow.gif" alt="User options" title="User options"></span>
                         <div id="user-username">I am <a href="/user/{{ request.user.username }}">{{ request.user.username }}</a></div>
                         <ul id="user-options-list">
-                            <li><a href="/user/{{ request.user.username }}">My profile</a></li>
+                            <li><a href="{{ request.user.get_absolute_url }}">My profile</a></li>
                             {% if user.is_superuser %}<li><a href="/admin">Administration</a></li>{% endif %}
                             <li><a href="/user/signout">Logout</a></li>
                         </ul>
@@ -50,8 +50,8 @@
         </div>
     </div>
 </div>
-<div id="content" class="frame">
-    {% block content %}Content{% endblock %}
+<div id="content" class="frame clearfix">
+    {% block content %}{% endblock %}
 </div>
 <div id="footer" class="clearfix">
     <div class="content frame">

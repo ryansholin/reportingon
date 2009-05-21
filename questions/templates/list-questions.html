@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}All questions | {{ block.super }}{% endblock %}
+
+{% load comments %}
+{% load tagging_tags %}
+
+{% block content %}
+    <div id="content-left">
+        {% include "includes/nav.html" %}
+        <div id="main-content">
+            <div id="question-list">
+                {% for question in questions %}
+                    {% get_comment_count for question as comment_count %}
+                    {% tags_for_object question as tags %}
+                    <div class="question clearfix">
+                        <div class="avatar left"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ question.author.username }}" title="{{ question.author.username }}"></div>
+                        <div class="meta left">
+                            <div class="answers-number right" title="Question score">{{ comment_count }}</div>
+                            <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}<span class="answers">&nbsp;&nbsp;{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</span></a>
+                            <div class="tools">
+                                <a href="#" class="good-question left">Good Question</a>
+                                <div class="posted">Posted in {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %} by <a href="{{ question.author.get_absolute_url }}">{{ question.author.username }}</a> at {{ question.created|date:"g:i a T" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="content-right">
+        {% include "includes/ask-a-question.html" %}
+    </div>
+{% endblock %}

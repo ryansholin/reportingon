@@ -1,0 +1,7 @@
+<ul id="content-selector" class="clearfix">
+    {% if request.user.is_authenticated %}
+        <li{% ifequal request.path '/' %} class="active"{% endifequal %}><a href="/">Watched{% ifequal request.path '/' %}<img id="selector-active-arrow" src="{{ MEDIA_URL }}images/selector-active-arrow.png" alt="" title="">{% endifequal %}</a></li>
+    {% endif %}
+    <li{% ifequal request.path '/questions/' %} class="active"{% endifequal %}><a href="{% url questions.views.list_questions %}">All questions{% ifequal request.path '/questions/' %}<img id="selector-active-arrow" src="{{ MEDIA_URL }}images/selector-active-arrow.png" alt="" title="">{% endifequal %}</a></li>
+    {% if request.user.is_authenticated %}<li class="last{% if profile %} active{% endif %}"><a href="{{ request.user.get_absolute_url }}">My profile{% if profile %}<img id="selector-active-arrow" src="{{ MEDIA_URL }}images/selector-active-arrow.png" alt="" title="">{% endif %}</a></li>{% endif %}
+</ul>

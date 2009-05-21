@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}My profile | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div id="content-left">
+        {% include "includes/nav.html" %}
+        <div id="main-content">
+            This is your profile page, {{ request.user.username }}.
+        </div>
+    </div>
+    <div id="content-right">
+        {% include "includes/ask-a-question.html" %}
+    </div>
+{% endblock %}

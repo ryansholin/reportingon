@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+ 
+{% block title %}Question | {{ block.super }}{% endblock %}
+ 
+{% block content %}
+    <div id="content-left">
+        {% include "includes/nav.html" %}
+        <div id="main-content">
+            <form action="" method="post"> 
+            	<fieldset> 
+            	    <ul> 
+            	        <li> 
+            	            <label for="question">Question</label> 
+            				{{ form.question }}
+            	        </li> 
+            	        <li> 
+            	            <label for="tags">Tags</label> 
+            				{{ form.tags }}
+            	        </li> 
+            			<input type="hidden" name="author" id="id_author" value="{{ request.user.id }}"> 
+            			<input type="hidden" name="status" id="id_status" value="1"> 
+            			<li><input type="submit" value="Submit"></li> 
+            	    </ul> 
+                </fieldset> 
+            </form>
+        </div>
+    </div>
+    <div id="content-right">
+        {% include "includes/ask-a-question.html" %}
+    </div>
+{% endblock %}

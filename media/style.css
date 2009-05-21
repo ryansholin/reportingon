@@ -178,7 +178,7 @@ body a:hover {text-decoration: underline;}
 #question-list .question {border-top: 1px solid #E5E5E5; padding: 15px 0; width: 625px;}
 #question-list .question .avatar {width: 85px;}
 #question-list .question .meta {width: 540px;}
-#question-list .question .title {color: #3e3e3e; font-size: 21px; font-weight: bold; text-decoration: none;}
+#question-list .question .title {color: #3e3e3e; display: block; font-size: 21px; font-weight: bold; text-decoration: none;}
 #question-list .question .title:hover {color: #49B2E8;}
 #question-list .question .answers {color: #c6c6c6;}
 #question-list .question .tools {clear: left; margin-top: 10px;}

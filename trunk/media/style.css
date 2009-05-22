@@ -181,11 +181,11 @@ body a:hover {text-decoration: underline;}
 .avatar {width: 85px;}
 .avatar img {float: left;}
 .question .meta, .answer .meta {width: 540px;}
-.question .title {color: #3e3e3e; display: block; font-size: 21px; font-weight: bold; text-decoration: none;}
+.question .title, .question .answers {color: #3e3e3e; display: block; font-size: 21px; font-weight: bold; text-decoration: none;}
 .question .title p, .answer .title p {margin: 1em 0;}
 .question .title p:first-child, .answer .title p:first-child {margin: 0;}
 .question a.title:hover {color: #49B2E8;}
-.question .answers {color: #c6c6c6;}
+.question .answers {color: #c6c6c6; display: block;}
 .question .tools, .answer .tools {clear: left; margin-top: 10px;}
 .question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px;}
 .question .posted, .answer .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px; width: 250px;}

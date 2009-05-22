@@ -18,7 +18,8 @@
                         <div class="avatar left"><a href="{{ question.author.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ question.author.username }}" title="{{ question.author.username }}"></a></div>
                         <div class="meta left">
                             <div class="answers-number right" title="# of answers + question points + answer points">{{ comment_count }}</div>
-                            <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}<span class="answers">&nbsp;&nbsp;{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</span></a>
+                            <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}</a>
+                            <div class="answers">{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</div>
                             <div class="tools">
                                 <a href="#" class="good-question left">Good Question</a>
                                 <div class="posted">Posted in {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %} by <a href="{{ question.author.get_absolute_url }}">{{ question.author.username }}</a> {{ question.created|naturalday }} at {{ question.created|date:"g:i a" }}</div>

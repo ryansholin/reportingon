@@ -13,4 +13,12 @@ $(function() {
             function() {$("#user-tag").removeClass('enabled')}
         )
     }
+    if ($("#new-answer-form").length) {
+        $("#new-answer-form").bind("submit", function() {
+            if ($("#id_comment").attr('value') == '') {
+                $("#new-answer-error").css('display', 'block');
+                return false;
+            }
+        });
+    }
 });

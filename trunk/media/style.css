@@ -18,11 +18,13 @@ blockquote, q {quotes: "" "";}
 /* Generic */
 .left {float: left;}
 .right {float: right;}
+.disabled {display: none;}
 em {font-style: italic;}
 strong {font-weight: bold;}
+h2 {color: #9b9b9b; font-size: 24px; font-weight: bold;}
 
 /* Forms */
-fieldset input, #search input {
+fieldset input, #search input, fieldset textarea {
     border: 1px solid #ACACAC;
     border-radius: 5px;
     border-bottom: 0;
@@ -33,7 +35,7 @@ fieldset input, #search input {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
-fieldset input {background-color: #F0F0F0; border-color: #A6A6A6; color: #3D3D3D; padding: 5px;}
+fieldset input, fieldset textarea {background-color: #F0F0F0; border-color: #A6A6A6; color: #3D3D3D; padding: 5px;}
 fieldset .info {color: #878787; line-height: 18px; margin-bottom: 25px; width: 289px;}
 legend {color: #3d3d3d; font-size: 24px; font-weight: bold; padding-bottom: 25px;}
 label {color: #9b9b9b; float: left; font-size: 18px; font-weight: bold; width: 115px;}
@@ -171,20 +173,23 @@ body a:hover {text-decoration: underline;}
 #content-selector li.active a, #new-question {background-color: #3D3D3D; color: #FFF; position: relative;}
 #new-question {background: #3D3D3D url('/media/images/new-question-icon.png') 49px center no-repeat; padding-left: 47px; width: 268px;}
 #new-question:hover {text-decoration: none;}
-#main-content {margin-top: 10px;}
+#main-content {clear: left; margin-top: 10px;}
 #selector-active-arrow {position: absolute; top: 49px; left: 50%;}
 
-/* Questions */
-#question-list .question {border-top: 1px solid #E5E5E5; padding: 15px 0; width: 625px;}
-#question-list .question .avatar {width: 85px;}
-#question-list .question .meta {width: 540px;}
-#question-list .question .title {color: #3e3e3e; display: block; font-size: 21px; font-weight: bold; text-decoration: none;}
-#question-list .question .title:hover {color: #49B2E8;}
-#question-list .question .answers {color: #c6c6c6;}
-#question-list .question .tools {clear: left; margin-top: 10px;}
-#question-list .question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px;}
-#question-list .question .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px;}
-#question-list .question .good-question {
+/* Questions and Answers */
+.question, .answer {border-top: 1px solid #E5E5E5; padding: 15px 0; width: 625px;}
+.avatar {width: 85px;}
+.avatar img {float: left;}
+.question .meta, .answer .meta {width: 540px;}
+.question .title {color: #3e3e3e; display: block; font-size: 21px; font-weight: bold; text-decoration: none;}
+.question .title p, .answer .title p {margin: 1em 0;}
+.question .title p:first-child, .answer .title p:first-child {margin: 0;}
+.question a.title:hover {color: #49B2E8;}
+.question .answers {color: #c6c6c6;}
+.question .tools, .answer .tools {clear: left; margin-top: 10px;}
+.question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px;}
+.question .posted, .answer .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px; width: 250px;}
+.question .good-question, .answer .good-answer {
     background: #E5E5E5 url('/media/images/plus.gif') 5px center no-repeat;
     border-radius: 3px;
     color: #9b9b9b;
@@ -198,4 +203,21 @@ body a:hover {text-decoration: underline;}
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 }
-#question-list .question .good-question:hover {color: #49B2E8; text-decoration: none;}
+.answer .good-answer {background-image: url('/media/images/plus-answer.gif');}
+.question .good-question:hover {color: #49B2E8; text-decoration: none;}
+.answer .good-answer:hover {color: #FB7119; text-decoration: none;}
+#answers h2 {margin: 10px 0 10px 85px;}
+#answers legend {color: #9B9B9B; display: block; line-height: auto; padding-left: 85px; padding-bottom: 10px;}
+#new-answer {border-top: 1px solid #E5E5E5; padding: 10px 0; width: 625px;}
+#new-answer h2 {margin-top: 0;}
+#new-answer textarea {height: 60px; width: 529px;}
+#new-answer .submit {margin-top: 10px;}
+#new-answer .error {margin-top: 0; width: 605px;}
+
+/* New Question */
+.new-question legend {padding-top: 15px;}
+.new-question div.error {width: 930px;}
+.new-question label {float: left; width: 100px;}
+.new-question textarea {height: 100px; font-size: 18px; width: 839px;}
+.new-question div.tags {margin: 10px 0;}
+.new-question input.submit {margin-bottom: 15px; margin-left: 100px;}

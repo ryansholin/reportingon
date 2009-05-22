@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% load comments %}
+{% load humanize %}
+{% load tagging_tags %}
 
 {% block title %}Question | {{ block.super }}{% endblock %}
 
@@ -8,8 +10,60 @@
     <div id="content-left">
         {% include "includes/nav.html" %}
         <div id="main-content">
-            <h1>Question:</h1><br>
-            {{ question }}<br><br><br>
+            <div class="question clearfix">
+                {% tags_for_object question as tags %}
+                <div class="avatar left"><a href="{{ question.author.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ question.author.username }}" title="{{ question.author.username }}"></a></div>
+                <div class="meta left">
+                    <div class="title">{{ question.question|urlizetrunc:50|linebreaks }}</div>
+                    <div class="tools">
+                        <a href="#" class="good-question left">Good Question</a>
+                        <div class="posted">Posted in {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %} by <a href="{{ question.author.get_absolute_url }}">{{ question.author.username }}</a> {{ question.created|naturalday }} at {{ question.created|date:"g:i a" }}</div>
+                    </div>
+                </div>
+            </div>
+            <div id="answers">
+                {% get_comment_count for question as answer_count %}
+                {% get_comment_list for question as answers %}
+                <h2>{{ answer_count }} answer{% ifnotequal answer_count 1 %}s{% endifnotequal %}</h2>
+                {% for answer in answers %}
+                    <div class="answer clearfix">
+                        <div class="avatar left"><a href="{{ answer.user.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ answer.user.username }}" title="{{ answer.user.username }}"></a></div>
+                        <div class="meta left">
+                            <div class="title">{{ answer.comment|urlizetrunc:50|linebreaks }}</div>
+                            <div class="tools">
+                                <a href="#" class="good-answer left">Good Answer</a>
+                                <div class="posted">Posted by <a href="{{ answer.user.get_absolute_url }}">{{ answer.user.username }}</a> {{ answer.submit_date|naturalday }} at {{ answer.submit_date|date:"g:i a" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div id="new-answer" class="clearfix">
+                    {% get_comment_form for question as form %}
+                    <form action="/answers/post/" method="post" id="new-answer-form">
+                        <div class="fields">
+                            <fieldset>
+                                <legend>Your answer</legend>
+                                <div class="error disabled" id="new-answer-error">This field is required.</div>
+                                <div class="avatar left"><a href="{{ answer.user.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ answer.user.username }}" title="{{ answer.user.username }}"></a></div>
+                                <div class="field"><label for="id_comment" style="display: none;">Answer</label> {{ form.comment }}</div>
+                                <div style="display: none;">
+                                    <label for="id_name">Name</label> <input id="id_name" type="text" name="name" maxlength="50" value="{{ request.user.username }}">
+                                    <label for="id_email">Email address</label> <input type="text" name="email" id="id_email" value="null@null.com">
+                                    <label for="id_url">URL</label> <input type="text" name="url" id="id_url" value="http://null.com">
+                                    <label for="id_honeypot">If you enter anything in this field your comment will be treated as spam</label> {{ form.honeypot }}
+                                    <input type="hidden" name="next" value="{{ question.get_absolute_url }}">
+                                    {{ form.content_type }}
+                                    {{ form.object_pk }}
+                                    {{ form.timestamp }}
+                                    {{ form.security_hash }}
+                                </div>
+                            </fieldset>
+                            <input type="submit" name="post" class="submit right" value="Submit answer">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--
             Answers ({% get_comment_count for question as comment_count %}{{ comment_count }}):<br>
             <ul>
                 {% get_comment_list for question as comment_list %}
@@ -17,26 +71,11 @@
                 <li style="list-style-type: disc; margin-left: 20px;">{{ comment.comment }} [<a href="/answers/edit/{{ comment.id }}">edit</a>] [<a href="/answers/delete/{{ comment.id }}">delete</a>]</li>
                 {% endfor %}
             </ul>
-            {% get_comment_form for question as form %}
-            <form action="/answers/post/" method="post">
-                <div style="display: none;">
-                    <label for="id_name">Name</label> <input id="id_name" type="text" name="name" maxlength="50" value="Guest"><br>
-                    <label for="id_email">Email address</label> <input type="text" name="email" id="id_email" value="null@null.com"><br>
-                    <label for="id_url">URL</label> <input type="text" name="url" id="id_url" value="http://null.com"><br>
-                </div>
-                <label for="id_comment">Answer</label> <br>
-                {{ form.comment }}
-                <div style="display: none;"><label for="id_honeypot">If you enter anything in this field your comment will be treated as spam</label> {{ form.honeypot }}</div>
-                {{ form.content_type }}
-                {{ form.object_pk }}
-                {{ form.timestamp }}
-                {{ form.security_hash }}
-                <input type="hidden" name="next" value="{{ question.get_absolute_url }}">
-                <input type="submit" name="post" class="submit-post" value="Post">
-            </form>
+            
             <br><br><br>
             <a href="/questions/edit/{{ question.id }}">Edit question</a><br>
             <a href="/questions/delete/{{ question.id }}">Delete question</a>
+            -->
         </div>
     </div>
     <div id="content-right">

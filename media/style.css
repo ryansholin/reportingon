@@ -24,7 +24,7 @@ strong {font-weight: bold;}
 h2 {color: #9b9b9b; font-size: 24px; font-weight: bold;}
 
 /* Forms */
-fieldset input, #search input, fieldset textarea {
+fieldset input, #search input, fieldset textarea, #query {
     border: 1px solid #ACACAC;
     border-radius: 5px;
     border-bottom: 0;
@@ -131,6 +131,20 @@ body a:hover {text-decoration: underline;}
     padding: 12px;
     width: 291px;
 }
+.search-field {font-size: 24px; font-weight: bold; padding-bottom: 25px; padding-top: 15px;}
+.search-field .submit {font-size: 18px;}
+#query {
+    background-color: #F0F0F0;
+    border-color: #A6A6A6;
+    color: #3D3D3D;
+    font: bold 20px Helvetica, Arial, Sans-Serif;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-top: 13px;
+    padding: 8px;
+    width: 291px;
+}
+#search-found {margin-bottom: 10px;}
 
 /* Login */
 #login-page {margin: 0 auto; width: 680px;}

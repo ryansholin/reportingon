@@ -73,6 +73,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_authopenid.middleware.OpenIDMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'reportingon.urls'
@@ -103,7 +104,9 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django_authopenid',
     'reportingon.questions',
+    'reportingon.utils',
     'registration',
+    'pagination',
     'compress',
     'tagging',
     'djangosphinx',

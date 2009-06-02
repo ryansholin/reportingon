@@ -21,7 +21,6 @@
             	    {% if form.errors.tags %}<div class="error">{{ form.errors.tags }}</div>{% endif %}
                     <div class="field tags"><label for="id_tags">Beats</label> {{ form.tags }}</div>
         			<input type="hidden" name="author" id="id_author" value="{{ request.user.id }}">
-        			<input type="hidden" name="status" id="id_status" value="1">
                 </fieldset>
                 <input type="submit" value="Ask the question" class="submit">
             </div>

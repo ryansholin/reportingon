@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Beats | {{ block.super }}{% endblock %}
+
+{% load tagcloud %}
+
+{% block content %}
+    <div id="content-left">
+        {% include "includes/nav.html" %}
+        <div id="main-content">
+            <ul id="beat-cloud">
+                {% tags_cloud_for_model questions.Question as beats %}
+                {% for beat in beats %}
+                    <li><a href="/beats/{{ beat|urlencode }}" class="beat-size-{{ beat.font_size }}{% if not beat.font_size %}4{% endif %}">{{ beat }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div id="content-right">
+        {% include "includes/ask-a-question.html" %}
+    </div>
+{% endblock %}

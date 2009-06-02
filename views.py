@@ -6,6 +6,9 @@ from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 
 from reportingon.questions.models import Question
+from reportingon.views import *
+
+from tagging.models import Tag, TaggedItem
 
 def home(request):
     if not request.user.is_authenticated():
@@ -26,3 +29,11 @@ def search(request, query):
 def user(request, user):
     profile = True
     return render_to_response('user.html', locals(), context_instance=RequestContext(request))
+
+def beats(request, beat):
+    if not beat:
+        beats = Tag.objects.all()
+        return render_to_response('beats.html', locals(), context_instance=RequestContext(request))
+    else:
+        questions = TaggedItem.objects.get_by_model(Question, Tag.objects.get(name=beat))
+        return render_to_response('beat.html', locals(), context_instance=RequestContext(request))

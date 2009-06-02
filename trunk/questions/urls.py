@@ -6,5 +6,5 @@ urlpatterns = patterns('',
     (r'^new/?$', new_question),
     (r'^edit/(?P<qid>[\d]+)', edit_question),
     (r'^delete/(?P<qid>[\d]+)', delete_question),
-    (r'^(?P<qid>[\d]+)', view_question),
+    (r'^(?P<qid>[\d]+)/(.+)', view_question),
 )

@@ -20,9 +20,9 @@ class Question(models.Model):
     )
     
     question    = models.TextField(_('question'))
-    slug        = models.SlugField(_('slug'), editable=False, null=False, blank=False)
-    author      = models.ForeignKey(User, blank=False, null=False)
-    status      = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1)
+    slug        = models.SlugField(_('slug'), null=False, blank=True)
+    author      = models.ForeignKey(User, blank=True, null=False)
+    status      = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=1, blank=True)
     created     = models.DateTimeField(_('created'), auto_now_add=True)
     modified    = models.DateTimeField(_('modified'), auto_now=True)
     tags        = TagField(blank=False)
@@ -35,14 +35,14 @@ class Question(models.Model):
     def __unicode__(self):
         return u'%s' % self.question
     
-    def get_absolute_url(self): 
-        return "/questions/%d" % self.id
+    def get_absolute_url(self):
+        return "/questions/%d/%s" % (self.id, self.slug)
         
     search = SphinxSearch(
-            index ='questions_question', 
-            weights = { # individual field weighting
-                'question': 100,
-                'tags': 80,
-                'author': 40,
-            }
-        )
+        index ='questions_question',
+        weights = {
+            'question': 100,
+            'tags': 80,
+            'author': 40,
+        }
+    )

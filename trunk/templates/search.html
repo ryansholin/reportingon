@@ -5,6 +5,7 @@
 {% load comments %}
 {% load tagging_tags %}
 {% load humanize %}
+{% load pagination_tags %}
 
 {% block content %}
     <div id="content-left">
@@ -21,7 +22,10 @@
         	<div id="search-found">
         	    <h2>
             	    {% if results %}
-            	        We found {{ search_meta.total_found }} thing{% ifnotequal search_meta.total_found 1 %}s{% endifnotequal %}.
+            	        {% autopaginate results 10 %}
+            	        <div class="question-count">
+                            {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} questions
+                        </div>
             	    {% endif %}
             	    {% if not results %}
             	        We couldn't find anything for that.
@@ -46,6 +50,11 @@
                     </div>
                 {% endfor %}
         	{% endif %}
+        	{% if results %}
+    	        <div class="question-count bottom">
+                    {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} questions
+                </div>
+    	    {% endif %}
         </div>
     </div>
     <div id="content-right">

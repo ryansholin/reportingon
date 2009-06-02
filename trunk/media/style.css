@@ -21,6 +21,7 @@ blockquote, q {quotes: "" "";}
 .disabled {display: none;}
 em {font-style: italic;}
 strong {font-weight: bold;}
+h1 {color: #3d3d3d; font-size: 24px; font-weight: bold;}
 h2 {color: #9b9b9b; font-size: 24px; font-weight: bold;}
 
 /* Forms */
@@ -187,13 +188,15 @@ body a:hover {text-decoration: underline;}
 #content-selector li.active a, #new-question {background-color: #3D3D3D; color: #FFF; position: relative;}
 #new-question {background: #3D3D3D url('/media/images/new-question-icon.png') 49px center no-repeat; padding-left: 47px; width: 268px;}
 #new-question:hover {text-decoration: none;}
-#main-content {clear: left; margin-top: 10px;}
+#main-content {clear: left; margin-top: 10px; margin-right: 10px;}
+#main-content h1 {padding-top: 15px; padding-bottom: 25px;}
 #selector-active-arrow {position: absolute; top: 49px; left: 50%;}
 
 /* Questions and Answers */
 .question, .answer {border-top: 1px solid #E5E5E5; padding: 15px 0; width: 625px;}
 .avatar {width: 85px;}
 .avatar img {float: left;}
+.question {clear: right;}
 .question .meta, .answer .meta {width: 540px;}
 .question .title, .question .answers {color: #3e3e3e; display: block; font-size: 21px; font-weight: bold; text-decoration: none;}
 .question .title p, .answer .title p {margin: 1em 0;}
@@ -227,6 +230,25 @@ body a:hover {text-decoration: underline;}
 #new-answer textarea {height: 60px; width: 529px;}
 #new-answer .submit {margin-top: 10px;}
 #new-answer .error {margin-top: 0; width: 605px;}
+.question-count {
+    background-color: #F0F0F0;
+    border-radius: 5px;
+    color: #898989;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+.question-count.bottom {margin-top: 10px; margin-bottom: 0;}
+.pagination {vertical-align: middle;}
+.watch {float: right;}
+#beat-cloud li {display: inline;}
+.beat-size-1 {font-size: 14px;}
+.beat-size-2 {font-size: 18px;}
+.beat-size-3 {font-size: 20px;}
+.beat-size-4 {font-size: 22px;}
 
 /* New Question */
 .new-question legend {padding-top: 15px;}

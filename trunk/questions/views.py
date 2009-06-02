@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
+from django.template.defaultfilters import slugify
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
@@ -19,11 +20,12 @@ def new_question(request):
     if(request.POST):
         form = QuestionForm(request.POST)
         if form.is_valid():
-            try:
-                question = form.save()
-                return HttpResponseRedirect(reverse(view_question, args=[question.pk]))
-            except ValueError:
-                pass
+            question = form.save(commit=False)
+            question.author = request.user
+            question.slug = slugify(question.question)
+            question.status = 1
+            question.save()
+            return HttpResponseRedirect(reverse(view_question, args=[question.pk, question.slug]))
     else:
         form = QuestionForm()
     

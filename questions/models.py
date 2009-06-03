@@ -1,8 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
-from django.db.models import permalink
-from django.contrib import admin
-from datetime import datetime
 from django.db import models
 
 import tagging

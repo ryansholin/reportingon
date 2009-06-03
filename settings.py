@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'django_authopenid',
     'reportingon.questions',
     'reportingon.utils',
+    'reportingon.watched',
     'registration',
     'pagination',
     'compress',

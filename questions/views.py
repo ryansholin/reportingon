@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.template.defaultfilters import slugify
@@ -13,6 +14,7 @@ def list_questions(request):
 
 def view_question(request, qid):
     question = Question.objects.get(id__exact=qid)
+    question.content_type = ContentType.objects.get_for_model(Question)
     return render_to_response('view-question.html', locals(), context_instance=RequestContext(request))
 
 @login_required

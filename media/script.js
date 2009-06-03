@@ -21,4 +21,10 @@ $(function() {
             }
         });
     }
+    if ($(".watch").length) {
+        $(".watch:not(.disabled)").bind("click", function() {
+            $.get($(this).attr('href'));
+            return false;
+        });
+    }
 });

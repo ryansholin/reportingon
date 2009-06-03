@@ -206,7 +206,7 @@ body a:hover {text-decoration: underline;}
 .question .tools, .answer .tools {clear: left; margin-top: 10px;}
 .question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px;}
 .question .posted, .answer .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px; width: 250px;}
-.question .good-question, .answer .good-answer {
+.question .good-question, .answer .good-answer, .watch {
     background: #E5E5E5 url('/media/images/plus.gif') 5px center no-repeat;
     border-radius: 3px;
     color: #9b9b9b;
@@ -220,16 +220,6 @@ body a:hover {text-decoration: underline;}
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 }
-.answer .good-answer {background-image: url('/media/images/plus-answer.gif');}
-.question .good-question:hover {color: #49B2E8; text-decoration: none;}
-.answer .good-answer:hover {color: #FB7119; text-decoration: none;}
-#answers h2 {margin: 10px 0 10px 85px;}
-#answers legend {color: #9B9B9B; display: block; line-height: auto; padding-left: 85px; padding-bottom: 10px;}
-#new-answer {border-top: 1px solid #E5E5E5; padding: 10px 0; width: 625px;}
-#new-answer h2 {margin-top: 0;}
-#new-answer textarea {height: 60px; width: 529px;}
-#new-answer .submit {margin-top: 10px;}
-#new-answer .error {margin-top: 0; width: 605px;}
 .question-count {
     background-color: #F0F0F0;
     border-radius: 5px;
@@ -242,8 +232,20 @@ body a:hover {text-decoration: underline;}
     -webkit-border-radius: 5px;
 }
 .question-count.bottom {margin-top: 10px; margin-bottom: 0;}
+.answer .good-answer {background-image: url('/media/images/plus-answer.gif');}
+.question .good-question:hover {color: #49B2E8; text-decoration: none;}
+.answer .good-answer:hover {color: #FB7119; text-decoration: none;}
+#answers h2 {margin: 10px 0 10px 85px;}
+#answers legend {color: #9B9B9B; display: block; line-height: auto; padding-left: 85px; padding-bottom: 10px;}
+#new-answer {border-top: 1px solid #E5E5E5; padding: 10px 0; width: 625px;}
+#new-answer h2 {margin-top: 0;}
+#new-answer textarea {height: 60px; width: 529px;}
+#new-answer .submit {margin-top: 10px;}
+#new-answer .error {margin-top: 0; width: 605px;}
+
+.watch {background-image: url('/media/images/plus-watch.gif'); float: right;}
+.watch:hover {color: #22C332; text-decoration: none;}
 .pagination {vertical-align: middle;}
-.watch {float: right;}
 #beat-cloud li {display: inline;}
 .beat-size-1 {font-size: 14px;}
 .beat-size-2 {font-size: 18px;}

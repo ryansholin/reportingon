@@ -2,9 +2,6 @@
 
 {% block title %}My profile | {{ block.super }}{% endblock %}
 
-{% load comments %}
-{% load tagging_tags %}
-{% load humanize %}
 {% load pagination_tags %}
 
 {% block content %}
@@ -21,36 +18,21 @@
         	</form>
         	<div id="search-found">
         	    <h2>
-            	    {% if results %}
-            	        {% autopaginate results 10 %}
+            	    {% if questions %}
+            	        {% autopaginate questions 10 %}
             	        <div class="question-count">
                             {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} questions
                         </div>
             	    {% endif %}
-            	    {% if not results %}
+            	    {% if not questions %}
             	        We couldn't find anything for that.
             	    {% endif %}
             	</h2>
         	</div>
-        	{% if results %}
-        		{% for question in results %}
-                    {% get_comment_count for question as comment_count %}
-                    {% tags_for_object question as tags %}
-                    <div class="question clearfix">
-                        <div class="avatar left"><a href="{{ question.author.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ question.author.username }}" title="{{ question.author.username }}"></a></div>
-                        <div class="meta left">
-                            <div class="answers-number right" title="# of answers + question points + answer points">{{ comment_count }}</div>
-                            <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}</a>
-                            <div class="answers">{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</div>
-                            <div class="tools">
-                                <a href="#" class="good-question left">Good Question</a>
-                                <div class="posted">Posted in {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %} by <a href="{{ question.author.get_absolute_url }}">{{ question.author.username }}</a> {{ question.created|naturalday }} at {{ question.created|date:"g:i a" }}</div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+        	{% if questions %}
+        		{% include "questions-list.html" %}
         	{% endif %}
-        	{% if results %}
+        	{% if questions %}
     	        <div class="question-count bottom">
                     {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} questions
                 </div>

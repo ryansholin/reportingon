@@ -6,8 +6,12 @@
     <div id="content-left">
         {% include "includes/nav.html" %}
         <div id="main-content">
-            Nice, you're logged in. This is where you'll eventually see things you've followed.<br><br>
-            Until then, get started by <a href="{% url questions.views.list_questions %}">browsing all questions</a>.
+            <br>
+            My watched stuff:<br><br>
+            {% for item in watched %}
+                <a href="{{ item.content_object.get_absolute_url }}">{{ item.content_object }}</a> ({{ item.content_object.content_type.name }} watched on {{ item.created }})<br>
+            {% endfor %}<br>
+            <a href="{% url questions.views.list_questions %}">Browse all questions</a>
         </div>
     </div>
     <div id="content-right">

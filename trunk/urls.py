@@ -12,9 +12,9 @@ urlpatterns = patterns('',
     (r'^user/', include('django_authopenid.urls')),
     (r'^watch/', include('reportingon.watched.urls')),
     (r'^beats/?(?P<beat>[^/]+)?$', beats),
+    (r'^users/?(?P<user>[^/]+)?', user),
     (r'^admin/(.*)', admin.site.root),
     (r'^search/(.*)', search),
-    (r'^users/(.*)', user),
     (r'^/?$', home),
 )
 

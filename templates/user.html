@@ -5,11 +5,62 @@
 {% block content %}
     <div id="content-left">
         {% include "includes/nav.html" %}
-        <div id="main-content">
-            This is your profile page, {{ request.user.username }}.
+        <div id="main-content" class="profile">
+            <div class="profile-top clearfix">
+                <div id="profile-image"><img src="{{ MEDIA_URL }}images/avatar-large.jpg" alt="{{ user.username }}" title="{{ user.username }}"></div>
+                <div class="meta">
+                    {% ifnotequal request.user user %}
+                        <a href="/watch/{{ user.content_type.id }}/{{ user.id }}" class="watch {% if not request.user.is_authenticated %}disabled{% endif %}">Watch user</a>
+                    {% else %}
+                        <a href="{{ request.user.get_absolute_url }}edit" class="edit-profile">Edit</a>
+                    {% endifnotequal %}
+                    <h1>{{ user.username }}</h1>
+                    <h2>Rochester, NY</h2>
+                    <div class="details">
+                        <dl>
+                            <dt>Affiliation:</dt>
+                            <dd>Lion Burger, LLC.</dd>
+                            <dt>Website:</dt>
+                            <dd><a href="http://nicksergeant.com">http://nicksergeant.com</a></dd>
+                            <dt>Bio:</dt>
+                            <dd>I like to go fishing, long walks on the beach. I’m a web developer with a sense of dirty laundry. Occasionally, I like to pet dogs and cats.</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="activity">
+                <h2>Activity</h2>
+                <ul>
+                    <li>Started watching the “<a href="#">edutainment</a>” beat&nbsp;&nbsp;<span>36 minutes ago</span></li>
+                    <li>Asked “<a href="#">What time is it in California?</a>”&nbsp;&nbsp;<span>1hr 42 minutes ago</span></li>
+                    <li>Answered “<a href="#">What’s DMB’s favorite venue to play in when in the United Kingdom?</a>”&nbsp;&nbsp;<span>4hr 12 minutes ago</span></li>
+                    <li>Started watching the question “<a href="#">How do you handle most voting registration systems in your town?</a>”&nbsp;&nbsp;<span>yesterday</span></li>
+                    <li>Started watching <a href="/users/ryansholin">Ryan Sholin</a>&nbsp;&nbsp;<span>2 days ago</span></li>
+                    <li>Started watching the search “<a href="#">florida reporters</a>”&nbsp;&nbsp;<span>6 days ago</span></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div id="content-right">
+    <div id="content-right" class="clearfix">
         {% include "includes/ask-a-question.html" %}
+        <div class="profile-sidebar">
+            <h2>Stats</h2>
+            <ul class="clearfix">
+                <li><a href="#">10 Questions</a></li>
+                <li><a href="#">7 Answers</a></li>
+                <li><a href="#">14 Liked Questions</a></li>
+                <li><a href="#">35 Liked Answers</a></li>
+            </ul>
+            <h2>Top beatings</h2>
+            <ul class="clearfix">
+                <li><a href="#">Edutainment (94)</a></li>
+                <li><a href="#">knight-news (54)</a></li>
+                <li><a href="#">Burgers (34)</a></li>
+                <li><a href="#">Harry Manback (33)</a></li>
+                <li><a href="#">Dave Matthews Band (17)</a></li>
+                <li><a href="#">O.A.R. (15)</a></li>
+                <li><a href="#">News in the New York (12)</a></li>
+            </ul>
+        </div>
     </div>
 {% endblock %}

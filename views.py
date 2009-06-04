@@ -1,10 +1,12 @@
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponse
 
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
+from django.contrib.auth.models import User
 
 from reportingon.questions.models import Question
 from reportingon.watched.models import Watched
@@ -29,7 +31,10 @@ def search(request, query):
     return render_to_response('search.html', context, context_instance=RequestContext(request))
 
 def user(request, user):
-    profile = True
+    user = get_object_or_404(User, username=user)
+    user.content_type = ContentType.objects.get_for_model(User)
+    if user == request.user:
+        profile = True
     return render_to_response('user.html', locals(), context_instance=RequestContext(request))
 
 def beats(request, beat):

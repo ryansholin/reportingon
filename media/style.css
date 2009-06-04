@@ -285,6 +285,6 @@ body a:hover {text-decoration: underline;}
 .profile-sidebar ul:last-child {margin-bottom: 0;}
 .profile-sidebar li a {display: block; float: left; font-size: 18px; font-weight: bold; padding: 1px 0; width: 100%;}
 .profile .activity {margin-top: 15px; clear: left;}
-.profile .activity li {background: transparent url('/media/images/activity-bullet.gif') 5px 0 no-repeat; font-size: 18px; font-weight: bold; margin: 10px 0; padding-left: 32px;}
-.profile .activity li:hover {background-position: -82px 0;}
+.profile .activity li {background: transparent url('/media/images/activity-bullet.gif') 0 5px no-repeat; font-size: 18px; font-weight: bold; margin: 10px 0; padding-left: 32px;}
+.profile .activity li:hover {background-position: 0 -82px;}
 .profile .activity li span {color: #D1D1D1;}

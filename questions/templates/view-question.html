@@ -3,6 +3,7 @@
 {% load comments %}
 {% load humanize %}
 {% load tagging_tags %}
+{% load content_type %}
 
 {% block title %}Question | {{ block.super }}{% endblock %}
 
@@ -17,7 +18,7 @@
                     <a href="/watch/{{ question.content_type.id }}/{{ question.id }}" class="watch {% if not request.user.is_authenticated %}disabled{% endif %}">Watch question</a>
                     <div class="title">{{ question.question|urlizetrunc:50|linebreaks }}</div>
                     <div class="tools">
-                        <a href="#" class="good-question left">Good Question</a>
+                        <a href="/rate/{% get_content_type_id question %}/{{ question.id }}" class="good-question rate left">Good Question</a>
                         <div class="posted">Posted in {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %} by <a href="{{ question.author.get_absolute_url }}">{{ question.author.username }}</a> {{ question.created|naturalday }} at {{ question.created|date:"g:i a" }}</div>
                     </div>
                 </div>
@@ -32,7 +33,7 @@
                         <div class="meta left">
                             <div class="title">{{ answer.comment|urlizetrunc:50|linebreaks }}</div>
                             <div class="tools">
-                                <a href="#" class="good-answer left">Good Answer</a>
+                                <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}" class="good-answer rate left">Good Answer</a>
                                 <div class="posted">Posted by <a href="{{ answer.user.get_absolute_url }}">{{ answer.user.username }}</a> {{ answer.submit_date|naturalday }} at {{ answer.submit_date|date:"g:i a" }}</div>
                             </div>
                         </div>

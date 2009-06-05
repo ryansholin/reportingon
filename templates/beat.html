@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load content_type %}
+
 {% block title %}Beats | {{ block.super }}{% endblock %}
 
 {% load pagination_tags %}
@@ -8,7 +10,7 @@
     <div id="content-left">
         {% include "includes/nav.html" %}
         <div id="main-content">
-            <h1><a href="/watch/{{ beat.content_type.id }}/{{ beat.id }}" class="watch {% if not request.user.is_authenticated %}disabled{% endif %}">Watch beat</a><a href="/beats">Beats</a> &raquo; {{ beat }}</h1>
+            <h1><a href="/watch/{% get_content_type_id beat %}/{{ beat.id }}" class="watch {% if not request.user.is_authenticated %}disabled{% endif %}">Watch beat</a><a href="/beats">Beats</a> &raquo; {{ beat }}</h1>
             <div id="question-list">
                 {% autopaginate questions 10 %}
                 <div class="question-count">

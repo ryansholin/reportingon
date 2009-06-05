@@ -8,19 +8,20 @@ from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 from django.contrib.auth.models import User
 
+from reportingon.watched.models import Watched, SavedSearch
 from reportingon.questions.models import Question
-from reportingon.watched.models import Watched
 from reportingon.views import *
 
 from tagging.models import Tag, TaggedItem
 
 def home(request):
     if not request.user.is_authenticated():
+        questions = Question.objects.all()[:2]
         return render_to_response('home-not-logged-in.html', locals(), context_instance=RequestContext(request))
     watched = Watched.objects.filter(user=request.user)
     return render_to_response('home-logged-in.html', locals(), context_instance=RequestContext(request))
 
-def search(request, query): 
+def search(request, query):
     try:
         if (query == ''):
             query = request.GET['query']
@@ -42,7 +43,7 @@ def beats(request, beat):
         beats = Tag.objects.all()
         return render_to_response('beats.html', locals(), context_instance=RequestContext(request))
     else:
-        beat = Tag.objects.get(name=beat)
+        beat = get_object_or_404(Tag, name=beat)
         beat.content_type = ContentType.objects.get_for_model(Tag)
         questions = TaggedItem.objects.get_by_model(Question, beat)
         return render_to_response('beat.html', locals(), context_instance=RequestContext(request))

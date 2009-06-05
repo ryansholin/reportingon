@@ -27,7 +27,7 @@
         </div>
         <div class="right">
             <div id="user-tag" class="clearfix">
-                {% if not user.is_authenticated %}<a href="{% url user_signin %}">Login</a> or <a href="{% url registration_register %}">Signup</a>{% endif %}
+                {% if not user.is_authenticated %}<a href="{% url registration_register %}">Signup</a> or <a href="{% url user_signin %}">Login</a>{% endif %}
                 {% if user.is_authenticated %}
                     <div id="user-options" class="clearfix">
                         <span id="user-options-arrow"><img class="left" src="{{ MEDIA_URL }}images/user-options-arrow.gif" alt="User options" title="User options"></span>

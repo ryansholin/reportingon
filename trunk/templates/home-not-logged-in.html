@@ -1,8 +1,42 @@
 {% extends "base.html" %}
 
-{% block title %}Home | {{ block.super }}{% endblock %}
+{% block title %}{{ block.super }}{% endblock %}
+
+{% block body_styles %} class="homepage"{% endblock %}
 
 {% block content %}
-    This is the homepage, and you're not <a href="{% url user_signin %}">logged in</a>. We haven't gotten that far, yet.<br><br>
-    Until we do something, you can <a href="{% url questions.views.list_questions %}">browse questions</a>.
+    <div id="homepage">
+        <div id="main-content-container" class="left ">
+            <div id="main-content" class="clearfix">
+                <h1>A professional reporting community for journalists.</h1>
+                <h2>ReportingOn helps journalists of all stripes find peers with experience dealing with a particular topic, story, or source. <a href="{% url registration_register %}">Get started.</a></h2>
+                <div class="activity">
+                    <h2>Latest scoop</h2>
+                    <ul>
+                        <li><a href="/questions">14 questions</a> asked in the past 30 minutes.</li>
+                        <li><a href="/users">6 new journalists</a> signed up today.</li>
+                        <li><a href="/beats">18 beats</a> seeing heavy use today. Most popular is "<a href="/beats/Bush">Bush</a>".</li>
+                    </ul>
+                </div>
+                <div id="question-list">
+                    <h2>Latest questions</h2>
+                    {% include "questions-list.html" %}
+                </div>
+            </div>
+        </div>
+        <div class="left sidebar">
+            <form id="reg_form" name="reg_form" action="{% url registration_register %}" method="post">
+                <div class="fields">
+                    <fieldset>
+            	        <legend>Signup or <a href="{% url user_signin %}">Login</a></legend>
+            	        <div class="field"><label for="id_username">Username</label><input id="id_username" type="text" class="required" name="username" maxlength="30" /></div> 
+                        <div class="field"><label for="id_email">Email</label><input id="id_email" type="text" class="required" name="email" maxlength="75" /></div> 
+                        <div class="field"><label for="id_password1">Password</label><input id="id_password1" type="password" class="required" name="password1" /></div> 
+                        <div class="field"><label for="id_password2">Confirm</label><input id="id_password2" type="password" class="required" name="password2" /></div> 
+                    </fieldset> 
+                    <input type="submit" name="bsignup'" value="Let's do this" class="submit right">
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

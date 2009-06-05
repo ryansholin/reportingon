@@ -27,4 +27,10 @@ $(function() {
             return false;
         });
     }
+    if ($(".rate").length) {
+        $(".rate:not(.disabled)").bind("click", function() {
+            $.get($(this).attr('href'));
+            return false;
+        });
+    }
 });

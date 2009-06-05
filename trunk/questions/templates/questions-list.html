@@ -2,6 +2,7 @@
 {% load tagging_tags %}
 {% load humanize %}
 {% load smart_if %}
+{% load content_type %}
 
 {% for question in questions %}
     {% get_comment_count for question as comment_count %}
@@ -13,7 +14,7 @@
             <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}</a>
             <div class="answers">{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</div>
             <div class="tools">
-                <a href="#" class="good-question left">Good Question</a>
+                <a href="/rate/{% get_content_type_id question %}/{{ question.id }}" class="good-question rate left">Good Question</a>
                 <div class="posted">
                     Posted in 
                     {% if tags.count > 1 %}

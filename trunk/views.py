@@ -1,4 +1,3 @@
-from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
@@ -33,7 +32,6 @@ def search(request, query):
 
 def user(request, user):
     user = get_object_or_404(User, username=user)
-    user.content_type = ContentType.objects.get_for_model(User)
     if user == request.user:
         profile = True
     return render_to_response('user.html', locals(), context_instance=RequestContext(request))
@@ -44,6 +42,5 @@ def beats(request, beat):
         return render_to_response('beats.html', locals(), context_instance=RequestContext(request))
     else:
         beat = get_object_or_404(Tag, name=beat)
-        beat.content_type = ContentType.objects.get_for_model(Tag)
         questions = TaggedItem.objects.get_by_model(Question, beat)
         return render_to_response('beat.html', locals(), context_instance=RequestContext(request))

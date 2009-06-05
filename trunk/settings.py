@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'reportingon.questions',
     'reportingon.utils',
     'reportingon.watched',
+    'reportingon.rated',
     'registration',
     'pagination',
     'compress',

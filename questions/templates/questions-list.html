@@ -16,8 +16,8 @@
                 <a href="#" class="good-question left">Good Question</a>
                 <div class="posted">
                     Posted in 
-                    {% if tags.count > 4 %}
-                         <a href="{{ question.get_absolute_url }}">{{ tags.count }} tags</a>
+                    {% if tags.count > 1 %}
+                         <a href="{{ question.get_absolute_url }}">{{ tags.count }} beats</a>
                     {% else %}
                         {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %}
                     {% endif %}

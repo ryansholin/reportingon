@@ -146,10 +146,11 @@ body a:hover {text-decoration: underline;}
     width: 291px;
 }
 #search-found {margin-bottom: 10px;}
+.watch-search {margin-bottom: 10px;}
 
 /* Login */
 #login-page {margin: 0 auto; width: 680px;}
-#login-page .field {margin: 5px 0;}
+#login-page .field, #homepage .sidebar .field {margin: 5px 0;}
 #login-page .submit {margin-top: 5px;}
 #openid-badge {margin-right: 7px; vertical-align: -2px;}
 .login-account {border-right: 1px solid #BFBFBF; margin-right: 50px; padding-right: 50px;}
@@ -161,6 +162,17 @@ body a:hover {text-decoration: underline;}
 #footer-logo {margin-top: 18px;}
 #footer-nav {border-left: 5px solid #CFCFCF; font-weight: bold; margin-left: 20px; padding: 2px 0;}
 #footer-nav a {display: block; padding: 2px 0 2px 20px;}
+
+/* Homepage */
+.homepage #content {padding: 0;}
+#homepage #main-content h1 {font-size: 36px; letter-spacing: -1px; padding: 0 !important;}
+#homepage #main-content h2 {font-size: 18px; margin-top: 15px;}
+#homepage #main-content .activity h2, #homepage #main-content #question-list h2 {font-size: 24px; margin: 0; margin-top: 30px; margin-bottom: 15px;}
+#homepage #main-content-container {border-right: 6px solid #F7F7F7; padding-right: 2px; width: 627px;}
+#homepage #main-content {border-right: 6px solid #EAEAEA; margin: 0; padding: 30px 0; padding-right: 15px;}
+#homepage .sidebar {padding-top: 30px; padding-left: 26px; width: 289px;}
+#homepage #question-list .question {width: 606px;}
+#homepage #question-list .question .meta {width: 521px;}
 
 /* Content */
 #content {padding: 10px 0;}
@@ -189,6 +201,7 @@ body a:hover {text-decoration: underline;}
 #new-question {background: #3D3D3D url('/media/images/new-question-icon.png') 49px center no-repeat; padding-left: 47px; width: 268px;}
 #new-question:hover {text-decoration: none;}
 #main-content {clear: left; margin-top: 10px; margin-right: 10px;}
+.new-question #main-content {margin-right: 0;}
 #main-content h1 {padding-top: 15px; padding-bottom: 25px;}
 #selector-active-arrow {position: absolute; top: 49px; left: 50%;}
 
@@ -205,7 +218,7 @@ body a:hover {text-decoration: underline;}
 .question .answers {color: #c6c6c6; display: block;}
 .question .tools, .answer .tools {clear: left; margin-top: 10px;}
 .question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px;}
-.question .posted, .answer .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px; width: 250px;}
+.question .posted, .answer .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px; width: 270px;}
 .question .good-question, .answer .good-answer, .watch {
     background: #E5E5E5 url('/media/images/plus.gif') 5px center no-repeat;
     border-radius: 3px;
@@ -237,7 +250,7 @@ body a:hover {text-decoration: underline;}
 .answer .good-answer:hover {color: #FB7119; text-decoration: none;}
 #answers h2 {margin: 10px 0 10px 85px;}
 #answers legend {color: #9B9B9B; display: block; line-height: auto; padding-left: 85px; padding-bottom: 10px;}
-#new-answer {border-top: 1px solid #E5E5E5; padding: 10px 0; width: 625px;}
+#new-answer, #answer-not-logged-in {border-top: 1px solid #E5E5E5; padding: 10px 0; width: 625px;}
 #new-answer h2 {margin-top: 0;}
 #new-answer textarea {height: 60px; width: 529px;}
 #new-answer .submit {margin-top: 10px;}
@@ -250,6 +263,7 @@ body a:hover {text-decoration: underline;}
 .beat-size-2 {font-size: 18px;}
 .beat-size-3 {font-size: 20px;}
 .beat-size-4 {font-size: 22px;}
+#answer-not-logged-in {font-size: 18px; font-weight: bold; padding-left: 85px; width: 540px;}
 
 /* New Question */
 .new-question legend {padding-top: 15px;}
@@ -284,7 +298,7 @@ body a:hover {text-decoration: underline;}
 .profile-sidebar ul {margin-bottom: 30px;}
 .profile-sidebar ul:last-child {margin-bottom: 0;}
 .profile-sidebar li a {display: block; float: left; font-size: 18px; font-weight: bold; padding: 1px 0; width: 100%;}
-.profile .activity {margin-top: 15px; clear: left;}
-.profile .activity li {background: transparent url('/media/images/activity-bullet.gif') 0 5px no-repeat; font-size: 18px; font-weight: bold; margin: 10px 0; padding-left: 32px;}
-.profile .activity li:hover {background-position: 0 -82px;}
-.profile .activity li span {color: #D1D1D1;}
+.activity {margin-top: 15px; clear: left;}
+.activity li {background: transparent url('/media/images/activity-bullet.gif') 0 5px no-repeat; font-size: 18px; font-weight: bold; margin: 10px 0; padding-left: 32px;}
+.activity li:hover {background-position: 0 -82px;}
+.activity li span {color: #D1D1D1;}

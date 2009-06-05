@@ -16,6 +16,11 @@
             	    </div>
                 </div>
         	</form>
+        	{% if questions %}
+            	<div class="watch-search clearfix">
+            	    <a href="/save-search/{{ query }}" class="watch {% if not request.user.is_authenticated %}disabled{% endif %}">Watch search</a>
+            	</div>
+        	{% endif %}
         	<div id="search-found">
         	    <h2>
             	    {% if questions %}

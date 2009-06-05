@@ -38,45 +38,36 @@
                         </div>
                     </div>
                 {% endfor %}
-                <div id="new-answer" class="clearfix">
-                    {% get_comment_form for question as form %}
-                    <form action="/answers/post/" method="post" id="new-answer-form">
-                        <div class="fields">
-                            <fieldset>
-                                <legend>Your answer</legend>
-                                <div class="error disabled" id="new-answer-error">This field is required.</div>
-                                <div class="avatar left"><a href="{{ answer.user.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ answer.user.username }}" title="{{ answer.user.username }}"></a></div>
-                                <div class="field"><label for="id_comment" style="display: none;">Answer</label> {{ form.comment }}</div>
-                                <div style="display: none;">
-                                    <label for="id_name">Name</label> <input id="id_name" type="text" name="name" maxlength="50" value="{{ request.user.username }}">
-                                    <label for="id_email">Email address</label> <input type="text" name="email" id="id_email" value="null@null.com">
-                                    <label for="id_url">URL</label> <input type="text" name="url" id="id_url" value="http://null.com">
-                                    <label for="id_honeypot">If you enter anything in this field your comment will be treated as spam</label> {{ form.honeypot }}
-                                    <input type="hidden" name="next" value="{{ question.get_absolute_url }}">
-                                    {{ form.content_type }}
-                                    {{ form.object_pk }}
-                                    {{ form.timestamp }}
-                                    {{ form.security_hash }}
-                                </div>
-                            </fieldset>
-                            <input type="submit" name="post" class="submit right" value="Submit answer">
-                        </div>
-                    </form>
-                </div>
+                {% if request.user.is_authenticated %}
+                    <div id="new-answer" class="clearfix">
+                        {% get_comment_form for question as form %}
+                        <form action="/answers/post/" method="post" id="new-answer-form">
+                            <div class="fields">
+                                <fieldset>
+                                    <legend>Your answer</legend>
+                                    <div class="error disabled" id="new-answer-error">This field is required.</div>
+                                    <div class="avatar left"><a href="{{ answer.user.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ answer.user.username }}" title="{{ answer.user.username }}"></a></div>
+                                    <div class="field"><label for="id_comment" style="display: none;">Answer</label> {{ form.comment }}</div>
+                                    <div style="display: none;">
+                                        <label for="id_name">Name</label> <input id="id_name" type="text" name="name" maxlength="50" value="{{ request.user.username }}">
+                                        <label for="id_email">Email address</label> <input type="text" name="email" id="id_email" value="null@null.com">
+                                        <label for="id_url">URL</label> <input type="text" name="url" id="id_url" value="http://null.com">
+                                        <label for="id_honeypot">If you enter anything in this field your comment will be treated as spam</label> {{ form.honeypot }}
+                                        <input type="hidden" name="next" value="{{ question.get_absolute_url }}">
+                                        {{ form.content_type }}
+                                        {{ form.object_pk }}
+                                        {{ form.timestamp }}
+                                        {{ form.security_hash }}
+                                    </div>
+                                </fieldset>
+                                <input type="submit" name="post" class="submit right" value="Submit answer">
+                            </div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div id="answer-not-logged-in"><a href="{% url registration_register %}?next={{ request.META.PATH_INFO }}">Signup</a> or <a href="{% url user_signin %}?next={{ request.META.PATH_INFO }}">Login</a> to give your 2&cent;</div>
+                {% endif %}
             </div>
-            <!--
-            Answers ({% get_comment_count for question as comment_count %}{{ comment_count }}):<br>
-            <ul>
-                {% get_comment_list for question as comment_list %}
-                {% for comment in comment_list %}
-                <li style="list-style-type: disc; margin-left: 20px;">{{ comment.comment }} [<a href="/answers/edit/{{ comment.id }}">edit</a>] [<a href="/answers/delete/{{ comment.id }}">delete</a>]</li>
-                {% endfor %}
-            </ul>
-            
-            <br><br><br>
-            <a href="/questions/edit/{{ question.id }}">Edit question</a><br>
-            <a href="/questions/delete/{{ question.id }}">Delete question</a>
-            -->
         </div>
     </div>
     <div id="content-right">

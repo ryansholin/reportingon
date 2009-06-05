@@ -9,7 +9,8 @@
             <br>
             My watched stuff:<br><br>
             {% for item in watched %}
-                <a href="{{ item.content_object.get_absolute_url }}">{{ item.content_object }}</a> ({{ item.content_object.content_type.name }} watched on {{ item.created }})<br>
+                <a href="{% ifequal    item.content_object.content_type.name 'tag' %}/beats/{{ item.content_object.name }}{% endifequal %}
+                         {% ifnotequal item.content_object.content_type.name 'Tag' %}{{ item.content_object.get_absolute_url }}{% endifnotequal %}">{{ item.content_object }}</a> ({{ item.content_object.content_type.name }} watched on {{ item.created }})<br>
             {% endfor %}<br>
             <a href="{% url questions.views.list_questions %}">Browse all questions</a>
         </div>

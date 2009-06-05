@@ -31,3 +31,18 @@ class Watched(models.Model):
     
     def __unicode__(self):
         return u'%s' % (self.get_content_object())
+
+class SavedSearch(models.Model):
+    """Saved Search model"""    
+    
+    query = models.TextField()
+    
+    class Meta:
+        verbose_name = _('Saved search')
+        verbose_name_plural = _('Saved searches')
+    
+    def get_absolute_url(self):
+        return "/search/%s" % self.query
+    
+    def __unicode__(self):
+        return u'%s' % self.query

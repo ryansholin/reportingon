@@ -2,6 +2,7 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 from reportingon import settings
 from reportingon.views import *
+from reportingon.watched.views import *
 
 admin.autodiscover()
 
@@ -11,6 +12,7 @@ urlpatterns = patterns('',
     (r'^answers/', include('django.contrib.comments.urls')),
     (r'^user/', include('django_authopenid.urls')),
     (r'^watch/', include('reportingon.watched.urls')),
+    (r'^save-search/?(?P<query>[^/]+)?', save_search),
     (r'^beats/?(?P<beat>[^/]+)?$', beats),
     (r'^users/?(?P<user>[^/]+)?', user),
     (r'^admin/(.*)', admin.site.root),

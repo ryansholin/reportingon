@@ -68,7 +68,7 @@ body a:hover {text-decoration: underline;}
 .page-message {color: #3d3d3d; font-size: 24px; font-weight: bold; margin: 50px auto; width: 475px;}
 
 /* Header */
-#header {background-color: #EAEAEA;}
+#header {background-color: #EAEAEA; height: 135px;}
 #header .right {text-align: right;}
 #logo {margin: 35px 0;}
 #user-tag {
@@ -264,6 +264,7 @@ body a:hover {text-decoration: underline;}
 .beat-size-3 {font-size: 20px;}
 .beat-size-4 {font-size: 22px;}
 #answer-not-logged-in {font-size: 18px; font-weight: bold; padding-left: 85px; width: 540px;}
+.watching, .watching:hover, .rated-good, .rated-good:hover, .watched, .watched:hover {background-color: #D8ECC6 !important; background-image: url('/media/images/plus-marked.gif') !important; color: #9B9B9B !important;}
 
 /* New Question */
 .new-question legend {padding-top: 15px;}

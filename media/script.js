@@ -23,13 +23,25 @@ $(function() {
     }
     if ($(".watch").length) {
         $(".watch:not(.disabled)").bind("click", function() {
-            $.get($(this).attr('href'));
+            $.getJSON($(this).attr('href'), function(data) {
+                if (data.status == '1') {
+                    $("#watched-" + data.content_type_id + "-" + data.object_id).addClass('watched');
+                } else {
+                    $("#watched-" + data.content_type_id + "-" + data.object_id).removeClass('watched');
+                } 
+            });
             return false;
         });
     }
     if ($(".rate").length) {
         $(".rate:not(.disabled)").bind("click", function() {
-            $.get($(this).attr('href'));
+            $.getJSON($(this).attr('href'), function(data) {
+                if (data.state == 'rated') {
+                    $("#rated-" + data.content_type_id + "-" + data.object_id).addClass('rated-good');
+                } else {
+                    $("#rated-" + data.content_type_id + "-" + data.object_id).removeClass('rated-good');
+                }
+            });
             return false;
         });
     }

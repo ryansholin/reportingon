@@ -3,6 +3,8 @@
 {% block title %}My profile | {{ block.super }}{% endblock %}
 
 {% load pagination_tags %}
+{% load watched %}
+{% load content_type %}
 
 {% block content %}
     <div id="content-left">
@@ -18,7 +20,8 @@
         	</form>
         	{% if questions %}
             	<div class="watch-search clearfix">
-            	    <a href="/save-search/{{ query }}" class="watch {% if not request.user.is_authenticated %}disabled{% endif %}">Watch search</a>
+            	    {% watched search_obj request.user as iswatched %}
+            	    <a href="/save-search/{{ query }}" class="watch {% if iswatched %}watched{% endif %} {% if not request.user.is_authenticated %}disabled{% endif %}" id="watched-{% get_content_type_id request.user %}-{{ search_obj.id }}">Watch search</a>
             	</div>
         	{% endif %}
         	<div id="search-found">

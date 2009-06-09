@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load content_type %}
+{% load watched %}
 
 {% block title %}My profile | {{ block.super }}{% endblock %}
 
@@ -12,7 +13,8 @@
                 <div id="profile-image"><img src="{{ MEDIA_URL }}images/avatar-large.jpg" alt="{{ user.username }}" title="{{ user.username }}"></div>
                 <div class="meta">
                     {% ifnotequal request.user user %}
-                        <a href="/watch/{% get_content_type_id user %}/{{ user.id }}" class="watch {% if not request.user.is_authenticated %}disabled{% endif %}">Watch user</a>
+                        {% watched user request.user as iswatched %}
+                        <a href="/watch/{% get_content_type_id user %}/{{ user.id }}" class="watch {% if iswatched %}watched{% endif %} {% if not request.user.is_authenticated %}disabled{% endif %}" id="watched-{% get_content_type_id user %}-{{ user.id }}">Watch user</a>
                     {% else %}
                         <a href="{{ request.user.get_absolute_url }}edit" class="edit-profile">Edit</a>
                     {% endifnotequal %}

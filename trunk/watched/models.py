@@ -22,7 +22,7 @@ class Watched(models.Model):
     class Meta:
         verbose_name = 'Watched item'
         verbose_name_plural = 'Watched items'
-        ordering  = ('-created',)
+        ordering  = ('-modified',)
         
     def __unicode__(self):
         return u'%s: %s' % (self.user, self.object)

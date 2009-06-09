@@ -17,7 +17,7 @@ def home(request):
     if not request.user.is_authenticated():
         questions = Question.objects.all()[:2]
         return render_to_response('home-not-logged-in.html', locals(), context_instance=RequestContext(request))
-    watched = Watched.objects.filter(user=request.user)
+    watched = Watched.objects.filter(user=request.user, status=1)
     return render_to_response('home-logged-in.html', locals(), context_instance=RequestContext(request))
 
 def search(request, query):
@@ -25,9 +25,10 @@ def search(request, query):
         if (query == ''):
             query = request.GET['query']
         results = Question.search.query(query)
-        context = {'questions': list(results), 'query': query, 'search_meta': results._sphinx}
+        search_obj = False
+        context = {'questions': list(results), 'query': query, 'search_meta': results._sphinx, 'search_obj': search_obj}
     except:
-        context = {'questions': list()}
+        context = {'questions': list(), 'search_obj': search_obj}
     return render_to_response('search.html', context, context_instance=RequestContext(request))
 
 def user(request, user):

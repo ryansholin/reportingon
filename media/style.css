@@ -265,6 +265,7 @@ body a:hover {text-decoration: underline;}
 .beat-size-4 {font-size: 22px;}
 #answer-not-logged-in {font-size: 18px; font-weight: bold; padding-left: 85px; width: 540px;}
 .watching, .watching:hover, .rated-good, .rated-good:hover, .watched, .watched:hover {background-color: #D8ECC6 !important; background-image: url('/media/images/plus-marked.gif') !important; color: #9B9B9B !important;}
+.loading, .loading:hover {background-image: url('/media/images/loading.gif') !important; background-position: 5px 5px !important;}
 
 /* New Question */
 .new-question legend {padding-top: 15px;}

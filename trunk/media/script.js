@@ -23,11 +23,14 @@ $(function() {
     }
     if ($(".watch").length) {
         $(".watch:not(.disabled)").bind("click", function() {
+            $(this).addClass('loading');
             $.getJSON($(this).attr('href'), function(data) {
+                var theobj = "#watched-" + data.content_type_id + "-" + data.object_id;
+                $(theobj).removeClass('loading');
                 if (data.status == '1') {
-                    $("#watched-" + data.content_type_id + "-" + data.object_id).addClass('watched');
+                    $(theobj).addClass('watched');
                 } else {
-                    $("#watched-" + data.content_type_id + "-" + data.object_id).removeClass('watched');
+                    $(theobj).removeClass('watched');
                 } 
             });
             return false;
@@ -35,11 +38,14 @@ $(function() {
     }
     if ($(".rate").length) {
         $(".rate:not(.disabled)").bind("click", function() {
+            $(this).addClass('loading');
             $.getJSON($(this).attr('href'), function(data) {
+                var theobj = "#rated-" + data.content_type_id + "-" + data.object_id;
+                $(theobj).removeClass('loading');
                 if (data.state == 'rated') {
-                    $("#rated-" + data.content_type_id + "-" + data.object_id).addClass('rated-good');
+                    $(theobj).addClass('rated-good');
                 } else {
-                    $("#rated-" + data.content_type_id + "-" + data.object_id).removeClass('rated-good');
+                    $(theobj).removeClass('rated-good');
                 }
             });
             return false;

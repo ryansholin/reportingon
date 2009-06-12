@@ -35,6 +35,35 @@ def user(request, user):
     user = get_object_or_404(User, username=user)
     if user == request.user:
         profile = True
+    
+    # get object or 404 is not the best way to do this!
+    recent_activity = list()
+    for obj in Watched.objects.filter(user=user):
+        key = obj.created.strftime("%Y-%m-%d %H:%M:%S")
+        if obj.content_type.model == 'user': # user is watching a user
+            description = """Started watching <a href="#">%s</a>""" % (get_object_or_404(User, id=obj.object_id)).username
+        elif obj.content_type.model == 'tag':
+            description = """Started watching the &ldquo;<a href="#">%s</a>&rdquo; beat""" % (get_object_or_404(Tag, id=obj.object_id)).name
+        elif obj.content_type.model == 'question':
+            description = """Started watching the question &ldquo;<a href="#">%s</a>&rdquo;""" % (get_object_or_404(Question, id=obj.object_id)).question
+        elif obj.content_type.model == 'savedsearch':
+            description = """Started watching the search &ldquo;<a href="#">%s</a>&rdquo;""" % (get_object_or_404(SavedSearch, id=obj.object_id)).query
+        else:
+            continue
+        recent_activity.append({ 'description': description, 'date': obj.created })
+        description = ''
+            
+    for obj in Question.objects.filter(author=user):
+        key = obj.created.strftime("%Y-%m-%d %H:%M:%S")
+        recent_activity.append({ 'description': """Asked &ldquo;<a href="#">%s</a>&rdquo;""" % obj.question, 'date': obj.created })
+        
+    for obj in Comment.objects.filter(user=user):
+        key = obj.submit_date.strftime("%Y-%m-%d %H:%M:%S")
+        # question = get_object_or_404(Question, id=obj.object_pk)
+        recent_activity.append({ 'description': """Answered a <a href="#">question</a> with &ldquo;<a href="#">%s</a>&rdquo;""" % obj.comment, 'date': obj.submit_date })
+        
+    recent_activity.sort(key=lambda x:x['date'], reverse=True)
+    
     return render_to_response('user.html', locals(), context_instance=RequestContext(request))
 
 def beats(request, beat):

@@ -35,12 +35,9 @@
             <div class="activity">
                 <h2>Activity</h2>
                 <ul>
-                    <li>Started watching the “<a href="#">edutainment</a>” beat&nbsp;&nbsp;<span>36 minutes ago</span></li>
-                    <li>Asked “<a href="#">What time is it in California?</a>”&nbsp;&nbsp;<span>1hr 42 minutes ago</span></li>
-                    <li>Answered “<a href="#">What’s DMB’s favorite venue to play in when in the United Kingdom?</a>”&nbsp;&nbsp;<span>4hr 12 minutes ago</span></li>
-                    <li>Started watching the question “<a href="#">How do you handle most voting registration systems in your town?</a>”&nbsp;&nbsp;<span>yesterday</span></li>
-                    <li>Started watching <a href="/users/ryansholin">Ryan Sholin</a>&nbsp;&nbsp;<span>2 days ago</span></li>
-                    <li>Started watching the search “<a href="#">florida reporters</a>”&nbsp;&nbsp;<span>6 days ago</span></li>
+										{% for activity in recent_activity %}
+											<li>{{ activity.description|safe }} <span>{{ activity.date|timesince }}</span></li>
+										{% endfor %}
                 </ul>
             </div>
         </div>

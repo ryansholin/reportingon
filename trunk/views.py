@@ -36,18 +36,17 @@ def user(request, user):
     if user == request.user:
         profile = True
     
-    # get object or 404 is not the best way to do this!
     recent_activity = list()
     for obj in Watched.objects.filter(user=user):
         key = obj.created.strftime("%Y-%m-%d %H:%M:%S")
         if obj.content_type.model == 'user': # user is watching a user
-            description = """Started watching <a href="#">%s</a>""" % (get_object_or_404(User, id=obj.object_id)).username
+            description = """Started watching <a href="#">%s</a>""" % obj.object.username
         elif obj.content_type.model == 'tag':
-            description = """Started watching the &ldquo;<a href="#">%s</a>&rdquo; beat""" % (get_object_or_404(Tag, id=obj.object_id)).name
+            description = """Started watching the &ldquo;<a href="#">%s</a>&rdquo; beat""" % obj.object.name
         elif obj.content_type.model == 'question':
-            description = """Started watching the question &ldquo;<a href="#">%s</a>&rdquo;""" % (get_object_or_404(Question, id=obj.object_id)).question
+            description = """Started watching the question &ldquo;<a href="#">%s</a>&rdquo;""" % obj.object.question
         elif obj.content_type.model == 'savedsearch':
-            description = """Started watching the search &ldquo;<a href="#">%s</a>&rdquo;""" % (get_object_or_404(SavedSearch, id=obj.object_id)).query
+            description = """Started watching the search &ldquo;<a href="#">%s</a>&rdquo;""" % obj.object.query
         else:
             continue
         recent_activity.append({ 'description': description, 'date': obj.created })

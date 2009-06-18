@@ -6,12 +6,11 @@
     <div id="content-left">
         {% include "includes/nav.html" %}
         <div id="main-content">
-            <br>
-            My watched stuff:<br><br>
-            {% for item in watched %}
-                <a href="{% ifequal    item.content_type.name 'tag' %}/beats/{{ item.object.name }}{% endifequal %}
-                         {% ifnotequal item.content_type.name 'tag' %}{{ item.object.get_absolute_url }}{% endifnotequal %}">{{ item.object }}</a> ({{ item.content_type.name }} watched on {{ item.created }})<br>
-            {% endfor %}<br>
+						<div style="font-size: 1.2em">
+						{% for item in watched_activity %}
+                <p style="padding-top: .4em;line-height:1.2em">{{ item.description|safe }} <span style="font-size: .8em;color: #888;white-space: nowrap;">{{ item.date|timesince }} ago</span></p>
+            {% endfor %}
+						</div>
             <a href="{% url questions.views.list_questions %}">Browse all questions</a>
         </div>
     </div>

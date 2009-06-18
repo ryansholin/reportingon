@@ -10,7 +10,7 @@
         {% include "includes/nav.html" %}
         <div id="main-content" class="profile">
             <div class="profile-top clearfix">
-                <div id="profile-image"><img src="{{ MEDIA_URL }}images/avatar-large.jpg" alt="{{ user.username }}" title="{{ user.username }}"></div>
+                <div id="profile-image" style="background-image: url('{{ MEDIA_URL }}images/avatar-large.jpg');"><span>54</span></div>
                 <div class="meta">
                     {% ifnotequal request.user user %}
                         {% watched user request.user as iswatched %}
@@ -35,9 +35,9 @@
             <div class="activity">
                 <h2>Activity</h2>
                 <ul>
-										{% for activity in recent_activity %}
-											<li>{{ activity.description|safe }} <span>{{ activity.date|timesince }}</span></li>
-										{% endfor %}
+					{% for activity in recent_activity %}
+						<li>{{ activity.description|safe }} <span>{{ activity.date|timesince }} ago</span></li>
+					{% endfor %}
                 </ul>
             </div>
         </div>

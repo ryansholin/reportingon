@@ -9,7 +9,7 @@
     {% get_comment_count for question as comment_count %}
     {% tags_for_object question as tags %}
     <div class="question clearfix">
-        <div class="avatar left"><a href="{{ question.author.get_absolute_url }}"><img src="{{ MEDIA_URL }}images/avatar.jpg" alt="{{ question.author.username }}" title="{{ question.author.username }}"></a></div>
+        <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ question.author.username }}"><span>54</span></a></div>
         <div class="meta left">
             <div class="answers-number right" title="# of answers + question points + answer points">{{ comment_count }}</div>
             <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}</a>

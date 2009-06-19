@@ -9,7 +9,7 @@
     {% get_comment_count for question as comment_count %}
     {% tags_for_object question as tags %}
     <div class="question clearfix">
-        <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ question.author.username }}"><span>{{ question.author.get_profile.get_score }}</span></a></div>
+        <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('http://www.gravatar.com/avatar/{{ question.author.get_profile.get_gravatar }}.jpg?s=70&amp;d=http://reportingon.com/media/images/avatar.jpg');" title="{{ question.author.username }}"><span>{{ question.author.get_profile.get_score }}</span></a></div>
         <div class="meta left">
             <div class="answers-number right" title="# of answers + question points + answer points">{{ question.get_score }}</div>
             <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}</a>

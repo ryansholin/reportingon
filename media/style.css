@@ -210,7 +210,7 @@ body a:hover {text-decoration: underline;}
 .avatar {width: 85px;}
 .avatar img {float: left;}
 .avatar a, #profile-image {display: block; height: 70px; position: relative; width: 70px; -moz-background-size: 70px 70px; -moz-border-radius: 5px; -webkit-background-size: 70px 70px; -webkit-border-radius: 5px;}
-#profile-image {height: 200px; width: 165px;}
+#profile-image {height: 165px; width: 165px;}
 .avatar a span, #profile-image span {
     background-color: #ec9b44;
     bottom: 0;

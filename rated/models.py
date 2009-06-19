@@ -10,13 +10,14 @@ class Rated(models.Model):
     object_id       = models.PositiveIntegerField(null=False)
     object          = generic.GenericForeignKey('content_type', 'object_id')
     user            = models.ForeignKey(User, null=False)
+    rated_user      = models.ForeignKey(User, null=False, related_name="rated_user")
     created         = models.DateTimeField(auto_now_add=True)
     modified        = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'Rated item'
         verbose_name_plural = 'Rated items'
-        ordering  = ('-created',)
+        ordering  = ('-modified',)
         unique_together = (('user', 'content_type', 'object_id'),)
     
     def __unicode__(self):

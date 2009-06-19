@@ -31,7 +31,7 @@
                 {% if user.is_authenticated %}
                     <div id="user-options" class="clearfix">
                         <span id="user-options-arrow"><img class="left" src="{{ MEDIA_URL }}images/user-options-arrow.gif" alt="User options" title="User options"></span>
-                        <div id="user-username">I am <a href="/{{ request.user.get_absolute_url }}">{{ request.user.username }}</a></div>
+                        <div id="user-username">I am <a href="{{ request.user.get_absolute_url }}">{{ request.user.username }}</a></div>
                         <ul id="user-options-list">
                             <li><a href="{{ request.user.get_absolute_url }}">My profile</a></li>
                             {% if user.is_superuser %}<li><a href="/admin">Administration</a></li>{% endif %}

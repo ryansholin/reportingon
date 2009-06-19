@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.models import ContentType
+
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
@@ -7,6 +9,7 @@ from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 from django.contrib.auth.models import User
 
+from reportingon.rated.models import Rated
 from reportingon.watched.models import Watched, SavedSearch
 from reportingon.questions.models import Question
 from reportingon.views import *
@@ -42,18 +45,25 @@ def search(request, query):
         if (query == ''):
             query = request.GET['query']
         results = Question.search.query(query)
-        search_obj = False
+        search_obj = SavedSearch.objects.get(query__exact=query)
         context = {'questions': list(results), 'query': query, 'search_meta': results._sphinx, 'search_obj': search_obj}
     except:
-        context = {'questions': list(), 'search_obj': search_obj}
+        context = {'questions': list(), 'query': query, 'search_obj': False}
     return render_to_response('search.html', context, context_instance=RequestContext(request))
 
 def user(request, user):
     user = get_object_or_404(User, username=user)
     if user == request.user:
         profile = True
+    recent_activity = get_recent_activity_for_user(user, True)[:30] # sort = true
     
-    recent_activity = get_recent_activity_for_user(user, True) # sort = true
+    answer_content_type = ContentType.objects.get(name='comment')
+    question_content_type = ContentType.objects.get(name='question')
+    
+    user_questions = Question.objects.filter(author=user).count()
+    user_answers = Comment.objects.filter(user=user).count()
+    user_liked_questions = Rated.objects.filter(content_type=question_content_type.id, rated_user=user).count()
+    user_liked_answers = Rated.objects.filter(content_type=answer_content_type.id, rated_user=user).count()
     
     return render_to_response('user.html', locals(), context_instance=RequestContext(request))
 

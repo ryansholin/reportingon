@@ -2,11 +2,17 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.db import models
 
+from django.contrib.contenttypes.models import ContentType
+
 import tagging
 from tagging.fields import TagField
 from tagging.models import Tag
 
 from djangosphinx import SphinxSearch
+
+from reportingon.rated.models import Rated
+
+from django.contrib.comments.models import Comment
 
 class Question(models.Model):
     """Question model"""
@@ -43,3 +49,18 @@ class Question(models.Model):
             'author': 40,
         }
     )
+    
+    def get_score(self):
+        answer_content_type = ContentType.objects.get(name='comment')
+        question_content_type = ContentType.objects.get(name='question')
+        
+        answers = Comment.objects.filter(content_type=question_content_type.id, object_pk=self.id)
+        question_points = 0
+        answer_points = 0
+        
+        for answer in answers:
+            answer_points += Rated.objects.filter(content_type=answer_content_type.id, object_id=answer.id).count()
+        
+        question_points = Rated.objects.filter(content_type=question_content_type.id, object_id=self.id).count()
+        
+        return answers.count() + question_points + answer_points

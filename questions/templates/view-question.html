@@ -14,7 +14,7 @@
         <div id="main-content">
             <div class="question clearfix">
                 {% tags_for_object question as tags %}
-                <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ question.author.username }}"><span>54</span></a></div>
+                <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ question.author.username }}"><span>{{ question.author.get_profile.get_score }}</span></a></div>
                 <div class="meta left">
                     {% watched question request.user as iswatched %}
                     <a href="/watch/{{ question.content_type.id }}/{{ question.id }}" class="watch {% if iswatched %}watched{% endif %} {% if not request.user.is_authenticated %}disabled{% endif %}" id="watched-{% get_content_type_id question %}-{{ question.id }}">Watch question</a>
@@ -22,9 +22,9 @@
                     <div class="tools">
                         {% rated question request.user as israted %}
                         {% if israted %}
-                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}" class="good-question rate left rated-good" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
+                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}/{{ question.author.id }}" class="good-question rate left rated-good" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
                         {% else %}
-                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}" class="good-question rate left" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
+                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}/{{ question.author.id }}" class="good-question rate left" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
                         {% endif %}
                         <div class="posted">Posted in {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %} by <a href="{{ question.author.get_absolute_url }}">{{ question.author.username }}</a> {{ question.created|naturalday }} at {{ question.created|date:"g:i a" }}</div>
                     </div>
@@ -33,18 +33,18 @@
             <div id="answers">
                 {% get_comment_count for question as answer_count %}
                 {% get_comment_list for question as answers %}
-                <h2>{{ answer_count }} answer{% ifnotequal answer_count 1 %}s{% endifnotequal %}</h2>
+                <h2>{{ question.get_score }} points, {{ answer_count }} answer{% ifnotequal answer_count 1 %}s{% endifnotequal %}</h2>
                 {% for answer in answers %}
                     <div class="answer clearfix">
-                        <div class="avatar left"><a href="{{ answer.user.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ answer.user.username }}"><span>54</span></a></div>
+                        <div class="avatar left"><a href="{{ answer.user.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ answer.user.username }}"><span>{{ answer.user.get_profile.get_score }}</span></a></div>
                         <div class="meta left">
                             <div class="title">{{ answer.comment|urlizetrunc:50|linebreaks }}</div>
                             <div class="tools">
                                 {% rated answer request.user as israted %}
                                 {% if israted %}
-                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}" class="good-answer rate left rated-good" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
+                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}/{{ answer.user.id }}" class="good-answer rate left rated-good" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
                                 {% else %}
-                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}" class="good-answer rate left" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
+                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}/{{ answer.user.id }}" class="good-answer rate left" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
                                 {% endif %}
                                 <div class="posted">Posted by <a href="{{ answer.user.get_absolute_url }}">{{ answer.user.username }}</a> {{ answer.submit_date|naturalday }} at {{ answer.submit_date|date:"g:i a" }}</div>
                             </div>
@@ -59,7 +59,7 @@
                                 <fieldset>
                                     <legend>Your answer</legend>
                                     <div class="error disabled" id="new-answer-error">This field is required.</div>
-                                    <div class="avatar left"><a href="{{ request.user.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ request.user.username }}"><span>54</span></a></div>
+                                    <div class="avatar left"><a href="{{ request.user.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ request.user.username }}"><span>{{ request.user.get_profile.get_score }}</span></a></div>
                                     <div class="field"><label for="id_comment" style="display: none;">Answer</label> {{ form.comment }}</div>
                                     <div style="display: none;">
                                         <label for="id_name">Name</label> <input id="id_name" type="text" name="name" maxlength="50" value="{{ request.user.username }}">

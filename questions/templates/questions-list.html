@@ -9,14 +9,14 @@
     {% get_comment_count for question as comment_count %}
     {% tags_for_object question as tags %}
     <div class="question clearfix">
-        <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ question.author.username }}"><span>54</span></a></div>
+        <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('{{ MEDIA_URL }}images/avatar.jpg');" title="{{ question.author.username }}"><span>{{ question.author.get_profile.get_score }}</span></a></div>
         <div class="meta left">
-            <div class="answers-number right" title="# of answers + question points + answer points">{{ comment_count }}</div>
+            <div class="answers-number right" title="# of answers + question points + answer points">{{ question.get_score }}</div>
             <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}</a>
             <div class="answers">{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</div>
             <div class="tools">
                 {% rated question request.user as israted %}
-                <a href="/rate/{% get_content_type_id question %}/{{ question.id }}" class="good-question rate left {% if israted %}rated-good{% endif %}" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
+                <a href="/rate/{% get_content_type_id question %}/{{ question.id }}/{{ question.author.id }}" class="good-question rate left {% if israted %}rated-good{% endif %}" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
                 <div class="posted">
                     Posted in 
                     {% if tags.count > 1 %}

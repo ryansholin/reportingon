@@ -297,7 +297,7 @@ body a:hover {text-decoration: underline;}
 
 /* Profile */
 .profile {border-top: 1px solid #E5E5E5; margin-right: 0 !important; padding: 10px 15px 0 0;}
-.profile .meta {float: left; margin-left: 15px;}
+.profile .meta {float: left; margin-left: 15px; width: 440px;}
 .profile h1, .profile h2 {margin: 0; padding: 0 !important;}
 .profile h1 {margin-top: 5px;}
 .profile .meta h2 {font-style: italic; font-size: 18px; line-height: auto;}

@@ -32,7 +32,7 @@
                             {% endif %}
                             {% if user.get_profile.bio %}
                                 <dt>Bio:</dt>
-                                <dd>{{ user.get_profile.bio }}</dd>
+                                <dd>{{ user.get_profile.bio|urlize }}</dd>
                             {% endif %}
                         </dl>
                     </div>

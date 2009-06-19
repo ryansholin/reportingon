@@ -3,14 +3,14 @@
 {% load content_type %}
 {% load watched %}
 
-{% block title %}My profile | {{ block.super }}{% endblock %}
+{% block title %}{% if profile %}My profile{% endif %}{% if not profile %}{{ user.username }}'s profile{% endif %} | {{ block.super }}{% endblock %}
 
 {% block content %}
     <div id="content-left">
         {% include "includes/nav.html" %}
         <div id="main-content" class="profile">
             <div class="profile-top clearfix">
-                <div id="profile-image" style="background-image: url('{{ MEDIA_URL }}images/avatar-large.jpg');"><span>54</span></div>
+                <div id="profile-image" style="background-image: url('{{ MEDIA_URL }}images/avatar-large.jpg');"><span>{{ user.get_profile.get_score }}</span></div>
                 <div class="meta">
                     {% ifnotequal request.user user %}
                         {% watched user request.user as iswatched %}
@@ -22,12 +22,18 @@
                     <h2>Rochester, NY</h2>
                     <div class="details">
                         <dl>
-                            <dt>Affiliation:</dt>
-                            <dd>Lion Burger, LLC.</dd>
-                            <dt>Website:</dt>
-                            <dd><a href="http://nicksergeant.com">http://nicksergeant.com</a></dd>
-                            <dt>Bio:</dt>
-                            <dd>I like to go fishing, long walks on the beach. I’m a web developer with a sense of dirty laundry. Occasionally, I like to pet dogs and cats.</dd>
+                            {% if user.get_profile.affiliation %}
+                                <dt>Affiliation:</dt>
+                                <dd>{{ user.get_profile.affiliation }}</dd>
+                            {% endif %}
+                            {% if user.get_profile.website %}
+                                <dt>Website:</dt>
+                                <dd>{{ user.get_profile.website|urlize }}</dd>
+                            {% endif %}
+                            {% if user.get_profile.bio %}
+                                <dt>Bio:</dt>
+                                <dd>{{ user.get_profile.bio }}</dd>
+                            {% endif %}
                         </dl>
                     </div>
                 </div>
@@ -45,13 +51,14 @@
     <div id="content-right" class="clearfix">
         {% include "includes/ask-a-question.html" %}
         <div class="profile-sidebar">
-            <h2>Stats</h2>
+            <h2>User stats</h2>
             <ul class="clearfix">
-                <li><a href="#">10 Questions</a></li>
-                <li><a href="#">7 Answers</a></li>
-                <li><a href="#">14 Liked Questions</a></li>
-                <li><a href="#">35 Liked Answers</a></li>
+                <li><a href="#">{{ user_questions }} Question{% ifnotequal user_questions 1 %}s{% endifnotequal %}</a></li>
+                <li><a href="#">{{ user_answers }} Answer{% ifnotequal user_answers 1 %}s{% endifnotequal %}</a></li>
+                <li><a href="#">{{ user_liked_questions }} Liked Question{% ifnotequal user_liked_questions 1 %}s{% endifnotequal %}</a></li>
+                <li><a href="#">{{ user_liked_answers }} Liked Answer{% ifnotequal user_liked_answers 1 %}s{% endifnotequal %}</a></li>
             </ul>
+            <!--
             <h2>Top beats</h2>
             <ul class="clearfix">
                 <li><a href="#">Edutainment (94)</a></li>
@@ -62,6 +69,7 @@
                 <li><a href="#">O.A.R. (15)</a></li>
                 <li><a href="#">News in the New York (12)</a></li>
             </ul>
+            -->
         </div>
     </div>
 {% endblock %}

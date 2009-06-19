@@ -25,7 +25,7 @@ $(function() {
         $(".watch:not(.disabled)").bind("click", function() {
             $(this).addClass('loading');
             $.getJSON($(this).attr('href'), function(data) {
-                var theobj = "#watched-" + data.content_type_id + "-" + data.object_id;
+                var theobj = '.watch';
                 $(theobj).removeClass('loading');
                 if (data.status == '1') {
                     $(theobj).addClass('watched');

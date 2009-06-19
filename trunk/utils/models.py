@@ -10,7 +10,9 @@ import md5
 
 class UserProfile(models.Model):
     user        = models.ForeignKey(User, unique=True)
+    location    = models.CharField(max_length=200, blank=True)
     affiliation = models.CharField(max_length=200, blank=True)
+    twitter     = models.CharField(max_length=200, blank=True)
     website     = models.URLField(blank=True)
     bio         = models.TextField(blank=True)
     

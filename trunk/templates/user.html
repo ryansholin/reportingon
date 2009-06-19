@@ -10,7 +10,7 @@
         {% include "includes/nav.html" %}
         <div id="main-content" class="profile">
             <div class="profile-top clearfix">
-                <div id="profile-image" style="background-image: url('{{ MEDIA_URL }}images/avatar-large.jpg');"><span>{{ user.get_profile.get_score }}</span></div>
+                <div id="profile-image" style="background-image: url('http://www.gravatar.com/avatar/{{ user.get_profile.get_gravatar }}.jpg?s=165&amp;d=http://reportingon.com/media/images/avatar-large.jpg');"><span>{{ user.get_profile.get_score }}</span></div>
                 <div class="meta">
                     {% ifnotequal request.user user %}
                         {% watched user request.user as iswatched %}

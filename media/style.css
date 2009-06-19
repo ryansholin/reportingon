@@ -321,9 +321,10 @@ body a:hover {text-decoration: underline;}
 .profile-sidebar ul:last-child {margin-bottom: 0;}
 .profile-sidebar li a {display: block; float: left; font-size: 18px; font-weight: bold; padding: 1px 0; width: 100%;}
 .activity {margin-top: 35px; clear: left;}
-.activity li {background: transparent url('/media/images/activity-bullet.gif') 0 5px no-repeat; font-size: 18px; font-weight: bold; margin: 10px 0; padding-left: 32px;}
+.activity li {background: transparent url('/media/images/activity-bullet.gif') 0 5px no-repeat; font-size: 18px; font-weight: bold; margin: 15px 0; padding-left: 32px;}
 .activity li:hover {background-position: 0 -82px;}
 .activity li span {color: #D1D1D1;}
+.activity h2 {margin-bottom: 13px;}
 .grav-edit {font-size: 18px; font-weight: bold;}
 
 #edit_form {margin-top: 15px;}
@@ -335,4 +336,4 @@ body a:hover {text-decoration: underline;}
 #twitter_update_list li:first-child {border-top: 1px solid #E5E5E5; padding-top: 15px;}
 #twitter_update_list li {border-bottom: 1px solid #E5E5E5; margin: 15px 0; padding-bottom: 15px;}
 #twitter_update_list li span {color: #3d3d3d; font-size: 16px; font-weight: bold;}
-#twitter_update_list li a {display: inline !important; float: none; font-weight: bold; font-size: 16px !important;}
+#twitter_update_list li a {display: inline !important; float: none; font-weight: bold;}

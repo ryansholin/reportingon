@@ -4,6 +4,7 @@
 {% load smart_if %}
 {% load content_type %}
 {% load watched %}
+{% load at_reply %}
 
 {% for question in questions %}
     {% get_comment_count for question as comment_count %}

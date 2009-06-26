@@ -233,6 +233,7 @@ body a:hover {text-decoration: underline;}
 .question .meta, .answer .meta {width: 540px;}
 .question .title, .question .answers {color: #3e3e3e; display: block; font-size: 21px; font-weight: bold; text-decoration: none;}
 .question .title p, .answer .title p {margin: 1em 0;}
+.answer .title p {line-height: 1.3em;}
 .question .title p:first-child, .answer .title p:first-child {margin: 0;}
 .question a.title:hover {color: #49B2E8;}
 .question .answers {color: #c6c6c6; display: block;}

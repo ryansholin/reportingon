@@ -45,6 +45,7 @@ def search(request, query):
         if (query == ''):
             query = request.GET['query']
         results = Question.search.query(query)
+        results = results[0:results.count()] # need to implicitly slice it in order to access the full results...djangosphinx FAIL
         search_obj = SavedSearch.objects.get(query__exact=query)
         context = {'questions': list(results), 'query': query, 'search_meta': results._sphinx, 'search_obj': search_obj}
     except:

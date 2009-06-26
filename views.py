@@ -41,15 +41,12 @@ def home(request):
     return render_to_response('home-logged-in.html', locals(), context_instance=RequestContext(request))
 
 def search(request, query):
-    try:
-        if (query == ''):
-            query = request.GET['query']
-        results = Question.search.query(query)
-        results = results[0:results.count()] # need to implicitly slice it in order to access the full results...djangosphinx FAIL
-        search_obj = SavedSearch.objects.get(query__exact=query)
-        context = {'questions': list(results), 'query': query, 'search_meta': results._sphinx, 'search_obj': search_obj}
-    except:
-        context = {'questions': list(), 'query': query, 'search_obj': False}
+    if (query == ''):
+        query = request.GET['query']
+    raw_results = Question.search.query(query)
+    results = raw_results[0:raw_results.count()] # need to implicitly slice it in order to access the full results...djangosphinx FAIL
+    search_obj = SavedSearch.objects.get(query__exact=query)
+    context = {'questions': results, 'query': query, 'search_meta': raw_results._sphinx, 'search_obj': search_obj}
     return render_to_response('search.html', context, context_instance=RequestContext(request))
 
 def user(request, user, edit):

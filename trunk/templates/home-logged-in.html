@@ -3,6 +3,13 @@
 {% block title %}Watched | {{ block.super }}{% endblock %}
 
 {% load pagination_tags %}
+{% load comments %}
+{% load tagging_tags %}
+{% load humanize %}
+{% load smart_if %}
+{% load content_type %}
+{% load watched %}
+{% load at_reply %}
 
 {% block content %}
     <div id="content-left">
@@ -14,15 +21,8 @@
                     {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items
                 </div>
                 {% for item in watched_activity %}
+                
                     {% ifequal item.type 'question' %}
-                        {% load comments %}
-                        {% load tagging_tags %}
-                        {% load humanize %}
-                        {% load smart_if %}
-                        {% load content_type %}
-                        {% load watched %}
-                        {% load at_reply %}
-
                         {% get_comment_count for item.question as comment_count %}
                         {% tags_for_object item.question as tags %}
                         <div class="question clearfix">
@@ -79,6 +79,7 @@
                     {% ifequal item.type 'user-answered-question' %}
                         <div class="question clearfix">user-answered-question</div>
                     {% endifequal %}
+                    
                 {% endfor %}
                 <div class="question-count bottom">
                     {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items

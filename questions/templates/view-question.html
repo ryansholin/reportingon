@@ -23,9 +23,9 @@
                     <div class="tools">
                         {% rated question request.user as israted %}
                         {% if israted %}
-                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}/{{ question.author.id }}" class="good-question rate left rated-good" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
+                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}/{{ question.author.id }}" class="good-question rate left {% if not request.user.is_authenticated %}disabled{% endif %} rated-good" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
                         {% else %}
-                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}/{{ question.author.id }}" class="good-question rate left" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
+                            <a href="/rate/{% get_content_type_id question %}/{{ question.id }}/{{ question.author.id }}" class="good-question rate left {% if not request.user.is_authenticated %}disabled{% endif %}" id="rated-{% get_content_type_id question %}-{{ question.id }}">Good Question</a>
                         {% endif %}
                         <div class="posted">Posted in {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %} by <a href="{{ question.author.get_absolute_url }}">{{ question.author.username }}</a> {{ question.created|naturalday }} at {{ question.created|date:"g:i a" }}</div>
                     </div>
@@ -36,16 +36,16 @@
                 {% get_comment_list for question as answers %}
                 <h2>{{ question.get_score }} points, {{ answer_count }} answer{% ifnotequal answer_count 1 %}s{% endifnotequal %}</h2>
                 {% for answer in answers %}
-                    <div class="answer clearfix">
+                    <div class="answer clearfix" id="answer-{{ answer.id }}">
                         <div class="avatar left"><a href="{{ answer.user.get_absolute_url }}" style="background-image: url('http://www.gravatar.com/avatar/{{ answer.user.get_profile.get_gravatar }}.jpg?s=70&amp;d=http://reportingon.com/media/images/avatar.jpg');" title="{{ answer.user.username }}"><span>{{ answer.user.get_profile.get_score }}</span></a></div>
                         <div class="meta left">
                             <div class="title">{{ answer.comment|urlizetrunc:50|linebreaks|at_reply }}</div>
                             <div class="tools">
                                 {% rated answer request.user as israted %}
                                 {% if israted %}
-                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}/{{ answer.user.id }}" class="good-answer rate left rated-good" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
+                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}/{{ answer.user.id }}" class="good-answer rate left rated-good {% if not request.user.is_authenticated %}disabled{% endif %}" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
                                 {% else %}
-                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}/{{ answer.user.id }}" class="good-answer rate left" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
+                                    <a href="/rate/{% get_content_type_id answer %}/{{ answer.id }}/{{ answer.user.id }}" class="good-answer rate left {% if not request.user.is_authenticated %}disabled{% endif %}" id="rated-{% get_content_type_id answer %}-{{ answer.id }}">Good Answer</a>
                                 {% endif %}
                                 <div class="posted">Posted by <a href="{{ answer.user.get_absolute_url }}">{{ answer.user.username }}</a> {{ answer.submit_date|naturalday }} at {{ answer.submit_date|date:"g:i a" }}</div>
                             </div>

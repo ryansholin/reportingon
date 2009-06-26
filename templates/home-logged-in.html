@@ -2,16 +2,88 @@
 
 {% block title %}Watched | {{ block.super }}{% endblock %}
 
+{% load pagination_tags %}
+
 {% block content %}
     <div id="content-left">
         {% include "includes/nav.html" %}
         <div id="main-content">
-						<div style="font-size: 1.2em">
-						{% for item in watched_activity %}
-                <p style="padding-top: .4em;line-height:1.2em">{{ item.description|safe }} <span style="font-size: .8em;color: #888;white-space: nowrap;">{{ item.date|timesince }} ago</span></p>
-            {% endfor %}
-						</div>
-            <a href="{% url questions.views.list_questions %}">Browse all questions</a>
+            <div id="question-list">
+                {% autopaginate watched_activity 10 %}
+                <div class="question-count">
+                    {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items
+                </div>
+                {% for item in watched_activity %}
+                    {% ifequal item.type 'question' %}
+                        {% load comments %}
+                        {% load tagging_tags %}
+                        {% load humanize %}
+                        {% load smart_if %}
+                        {% load content_type %}
+                        {% load watched %}
+                        {% load at_reply %}
+
+                        {% get_comment_count for item.question as comment_count %}
+                        {% tags_for_object item.question as tags %}
+                        <div class="question clearfix">
+                            <div class="avatar left"><a href="{{ item.question.author.get_absolute_url }}" style="background-image: url('http://www.gravatar.com/avatar/{{ item.question.author.get_profile.get_gravatar }}.jpg?s=70&amp;d=http://reportingon.com/media/images/avatar.jpg');" title="{{ item.question.author.username }}"><span>{{ item.question.author.get_profile.get_score }}</span></a></div>
+                            <div class="meta left">
+                                <div class="answers-number right" title="# of answers + item.question points + answer points">{{ item.question.get_score }}</div>
+                                <a href="{{ item.question.get_absolute_url }}" class="title">{{ item.question }}</a>
+                                <div class="answers">{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</div>
+                                <div class="tools">
+                                    {% rated item.question request.user as israted %}
+                                    <a href="/rate/{% get_content_type_id item.question %}/{{ item.question.id }}/{{ item.question.author.id }}" class="good-question rate {% if not request.user.is_authenticated %}disabled{% endif %} left {% if israted %}rated-good{% endif %}" id="rated-{% get_content_type_id item.question %}-{{ item.question.id }}">Good question</a>
+                                    <div class="posted">
+                                        Posted in 
+                                        {% if tags.count > 1 %}
+                                             <a href="{{ item.question.get_absolute_url }}">{{ tags.count }} beats</a>
+                                        {% else %}
+                                            {% for tag in tags %}<a href="/beats/{{ tag|urlencode }}">{{ tag }}</a>, {% endfor %}
+                                        {% endif %}
+                                        by <a href="{{ item.question.author.get_absolute_url }}">{{ item.question.author.username }}</a> {{ item.question.created|naturalday }} at {{ item.question.created|date:"g:i a" }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endifequal %}
+                    
+                    {% ifequal item.type 'answer' %}
+                        <div class="question clearfix">answer</div>
+                    {% endifequal %}
+                    
+                    {% ifequal item.type 'user-watched-user' %}
+                        <div class="question clearfix">user-watched-user</div>
+                    {% endifequal %}
+                
+                    {% ifequal item.type 'user-watched-beat' %}
+                        <div class="question clearfix">user-watched-beat</div>
+                    {% endifequal %}
+                    
+                    {% ifequal item.type 'user-watched-question' %}
+                        <div class="question clearfix">user-watched-question</div>
+                    {% endifequal %}
+                    
+                    {% ifequal item.type 'user-watched-search' %}
+                        <div class="question clearfix">user-watched-search</div>
+                    {% endifequal %}
+                    
+                    {% ifequal item.type 'user-asked-question' %}
+                        <div class="question clearfix">user-asked-question</div>
+                    {% endifequal %}
+                    
+                    {% ifequal item.type 'user-updated-question' %}
+                        <div class="question clearfix">user-updated-question</div>
+                    {% endifequal %}
+                    
+                    {% ifequal item.type 'user-answered-question' %}
+                        <div class="question clearfix">user-answered-question</div>
+                    {% endifequal %}
+                {% endfor %}
+                <div class="question-count bottom">
+                    {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items
+                </div>
+            </div>
         </div>
     </div>
     <div id="content-right">

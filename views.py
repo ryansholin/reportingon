@@ -58,7 +58,7 @@ def user(request, user, edit):
         profile = True
         
     if not edit:
-        recent_activity = get_recent_activity_for_user(user, True)[:30] # sort = true
+        recent_activity = get_recent_activity_for_user(user, True) # sort = true
     
     answer_content_type = ContentType.objects.get(name='comment')
     question_content_type = ContentType.objects.get(name='question')

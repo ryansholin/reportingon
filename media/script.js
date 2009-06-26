@@ -51,4 +51,9 @@ $(function() {
             return false;
         });
     }
+    if ($(".activity .pages").length) {
+        $.each($(".activity .pages a"), function() {
+            $(this).attr('href', $(this).attr('href') + '#activity')
+        });
+    }
 });

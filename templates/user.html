@@ -2,6 +2,7 @@
 
 {% load content_type %}
 {% load watched %}
+{% load pagination_tags %}
 
 {% block title %}{% if profile %}My profile{% endif %}{% if not profile %}{{ user.username }}'s profile{% endif %} | {{ block.super }}{% endblock %}
 
@@ -39,11 +40,19 @@
                 </div>
             </div>
             <div class="activity">
+                <a name="activity"></a>
                 <h2>Activity</h2>
                 <ul>
+                    {% autopaginate recent_activity 10 %}
+                    <div class="question-count">
+                        {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items
+                    </div>
 					{% for activity in recent_activity %}
 						<li>{{ activity.description|safe }} <span>{{ activity.date|timesince }} ago</span></li>
 					{% endfor %}
+					<div class="question-count">
+                        {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items
+                    </div>
                 </ul>
             </div>
         </div>

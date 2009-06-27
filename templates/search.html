@@ -21,7 +21,7 @@
         	{% if questions %}
             	<div class="watch-search clearfix">
             	    {% watched search_obj request.user as iswatched %}
-            	    <a href="/save-search/{{ query }}" class="watch {% if iswatched %}watched{% endif %} {% if not request.user.is_authenticated %}disabled{% endif %}" id="watched-{% get_content_type_id request.user %}-{{ search_obj.id }}">Watch search</a>
+            	    <a href="/save-search/{{ query }}" class="watch {% if iswatched %}watched{% endif %} {% if not request.user.is_authenticated %}disabled{% endif %}" id="watched-{% if not request.user.is_authenticated %}anon{% else %}{% get_content_type_id request.user %}{% endif %}-{{ search_obj.id }}">Watch search</a>
             	</div>
         	{% endif %}
         	<div id="search-found">

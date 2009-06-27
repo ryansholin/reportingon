@@ -21,7 +21,7 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False):
                 questions = Question.objects.filter(tags__icontains=obj.object.name)[:50] # limit this to something reasonable...
                 watched_beats.remove(obj)
                 for question in questions:
-                    recent_activity.append({ 'description': question, 'date': question.created , 'type': 'new-question-in-watched-beat'})
+                    recent_activity.append({ 'description': question, 'date': question.created , 'type': 'new-question-in-watched-beat', 'id': type + str(obj.object_id) })
             
         elif obj.content_type.model == 'question':
             type = 'user-watched-question'
@@ -33,24 +33,26 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False):
         else:
             type = 'fail'
             continue
-        recent_activity.append({ 'description': description, 'date': obj.created , 'type': type})
+            
+        recent_activity.append({ 'description': description, 'date': obj.created , 'type': type, 'id': type + str(obj.object_id) })
         description = ''
         
     for obj in Question.objects.filter(author=user):
-        type = 'question'
-        recent_activity.append({ 'description': """%s &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> asked""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Asked', obj.get_absolute_url(), obj.question), 'date': obj.created, 'type': type, 'question': obj })
+        type = 'user-created-question'
+        recent_activity.append({ 'description': """%s &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> asked""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Asked', obj.get_absolute_url(), obj.question), 'date': obj.created, 'type': type, 'question': obj, 'id': type + str(obj.id) })
     
     for obj in Comment.objects.filter(user=user):
-        type = 'answer'
+        type = 'answer-to-watched-question'
         try:
             question = Question.objects.get(id=obj.object_pk)
-            recent_activity.append({ 'description': """%s a <a href="%s">question</a> with &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> answered""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Answered', question.get_absolute_url(), question.get_absolute_url() + '#answer-' + str(obj.id), obj.comment), 'date': obj.submit_date, 'type': type })
+            recent_activity.append({ 'description': """%s a <a href="%s">question</a> with &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> answered""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Answered', question.get_absolute_url(), question.get_absolute_url() + '#answer-' + str(obj.id), obj.comment), 'date': obj.submit_date, 'type': type, 'id': type + str(question.id) })
         except:
             pass
-            
-    recent_activity.sort(key=lambda x:x['date'], reverse=True)
     
-    return recent_activity
+    unique_activity = uniqueify(recent_activity, lambda x:x['id'])
+    unique_activity.sort(key=lambda x:x['date'], reverse=True)
+
+    return unique_activity
     
 # requires a 'question' object
 def get_recent_activity_for_question(question, sort=False, thirdPerson=False):
@@ -77,3 +79,18 @@ def get_recent_activity_for_question(question, sort=False, thirdPerson=False):
         recent_activity.sort(key=lambda x:x['date'], reverse=True)
         
     return recent_activity
+    
+def uniqueify(seq, idfun=None):  
+    if idfun is None: 
+        def idfun(x): return x 
+    seen = {} 
+    result = [] 
+    for item in seq: 
+        marker = idfun(item) 
+        # in old Python versions: 
+        # if seen.has_key(marker) 
+        # but in new ones: 
+        if marker in seen: continue 
+        seen[marker] = 1 
+        result.append(item) 
+    return result

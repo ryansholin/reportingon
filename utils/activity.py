@@ -5,6 +5,8 @@ from django.contrib.comments.models import Comment
 # requires 'user' object
 def get_recent_activity_for_user(user, sort=False, thirdPerson=False):
     recent_activity = list()
+    watched_beats = list(Watched.objects.filter(user=user, content_type__model='tag'))
+    watched_questions = list(Watched.objects.filter(user=user, content_type__model='question'))
     for obj in Watched.objects.filter(user=user):
         if obj.content_type.model == 'user': # user is watching a user
             type = 'user-watched-user'
@@ -13,6 +15,14 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False):
             type = 'user-watched-beat'
             tag_url = '/beats/%s' % obj.object.name
             description = """%s watching the &ldquo;<a href="%s">%s</a>&rdquo; beat""" % ("""<a href="%s">%s</a> started""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Started', tag_url, obj.object.name)
+                        
+            # get questions for watched beat
+            if obj in watched_beats: 
+                questions = Question.objects.filter(tags__icontains=obj.object.name)[:50] # limit this to something reasonable...
+                watched_beats.remove(obj)
+                for question in questions:
+                    recent_activity.append({ 'description': question, 'date': question.created , 'type': 'new-question-in-watched-beat'})
+            
         elif obj.content_type.model == 'question':
             type = 'user-watched-question'
             description = """%s watching the question &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> started""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Started', obj.object.get_absolute_url(), obj.object.question)
@@ -37,6 +47,8 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False):
             recent_activity.append({ 'description': """%s a <a href="%s">question</a> with &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> answered""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Answered', question.get_absolute_url(), question.get_absolute_url() + '#answer-' + str(obj.id), obj.comment), 'date': obj.submit_date, 'type': type })
         except:
             pass
+            
+    recent_activity.sort(key=lambda x:x['date'], reverse=True)
     
     return recent_activity
     

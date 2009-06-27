@@ -79,6 +79,10 @@
                     {% ifequal item.type 'user-answered-question' %}
                         <div class="question clearfix">user-answered-question</div>
                     {% endifequal %}
+
+										{% ifequal item.type 'new-question-in-watched-beat' %}
+                        <div class="question clearfix">new-question-in-watched-beat</div>
+                    {% endifequal %}
                     
                 {% endfor %}
                 <div class="question-count bottom">

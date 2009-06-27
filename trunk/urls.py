@@ -3,10 +3,20 @@ from django.contrib import admin
 from reportingon import settings
 from reportingon.views import *
 from reportingon.watched.views import *
+from reportingon.feeds import LatestQuestions, LatestQuestionsByBeat, LatestQuestionsBySearch, LatestAnswersByQuestion, LatestQuestionsByUser
 
 admin.autodiscover()
 
+feeds = {
+    'latest': LatestQuestions,              # /feeds/latest 
+    'beat': LatestQuestionsByBeat,          # /feeds/beat/beat terms here
+    'search': LatestQuestionsBySearch,      # /feeds/search/search terms go here
+    'questions': LatestAnswersByQuestion,   # /feeds/question/16[/slug-is-optional/]
+    'users': LatestQuestionsByUser,         # /feeds/user/23
+}
+
 urlpatterns = patterns('',
+    (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^questions/', include('reportingon.questions.urls')),
     (r'^answers/', include('django.contrib.comments.urls')),

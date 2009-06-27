@@ -22,7 +22,7 @@
                 </div>
                 {% for item in watched_activity %}
                 
-                    {% ifequal item.type 'question' %}
+                    {% ifequal item.type 'user-created-question' %}
                         {% get_comment_count for item.question as comment_count %}
                         {% tags_for_object item.question as tags %}
                         <div class="question clearfix">
@@ -48,8 +48,8 @@
                         </div>
                     {% endifequal %}
                     
-                    {% ifequal item.type 'answer' %}
-                        <div class="question clearfix">answer</div>
+                    {% ifequal item.type 'answer-to-watched-question' %}
+                        <div class="question clearfix">answer-to-watched-question</div>
                     {% endifequal %}
                     
                     {% ifequal item.type 'user-watched-user' %}

@@ -40,7 +40,7 @@ class LatestAnswersByQuestion(Feed):
     def get_object(self, bits):        
         if len(bits) == 0 or len(bits) > 2:
             raise ObjectDoesNotExist
-        return Question.objects.get(username__iexact=bits[0])
+        return Question.objects.get(id__iexact=bits[0])
 
     def title(self, obj):
         return "ReportingOn: The latest answers to %s" % obj.question

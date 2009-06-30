@@ -33,6 +33,7 @@ def home(request):
         elif obj.content_type.model == 'question':
             watched_activity.extend(get_recent_activity_for_question(Question.objects.get(id=obj.object_id)))
             
+    watched_activity = uniqueify(watched_activity, lambda x:x['id'])
     watched_activity.sort(key=lambda x:x['date'], reverse=True)
     
     # hard limit on 30

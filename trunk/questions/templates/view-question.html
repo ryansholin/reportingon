@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="ReportingOn Answers to Question: {{ question.question }}" href="/feeds/questions/{{ question.id }}">{% endblock %}
+
 {% load comments %}
 {% load humanize %}
 {% load tagging_tags %}

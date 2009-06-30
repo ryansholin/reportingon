@@ -2,6 +2,8 @@
 
 {% block title %}My profile | {{ block.super }}{% endblock %}
 
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="ReportingOn Search: {{ query }}" href="/feeds/search/{{ query }}">{% endblock %}
+
 {% load pagination_tags %}
 {% load watched %}
 {% load content_type %}

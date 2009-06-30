@@ -10,6 +10,8 @@
 {% load content_type %}
 {% load watched %}
 {% load at_reply %}
+{% load get_score %}
+{% load truncatesmart %}
 
 {% block content %}
     <div id="content-left">
@@ -22,7 +24,7 @@
                 </div>
                 {% for item in watched_activity %}
                 
-                    {% ifequal item.type 'user-created-question' %}
+                    {% ifequal item.type 'question' %}
                         {% get_comment_count for item.question as comment_count %}
                         {% tags_for_object item.question as tags %}
                         <div class="question clearfix">
@@ -48,41 +50,33 @@
                         </div>
                     {% endifequal %}
                     
-                    {% ifequal item.type 'answer-to-watched-question' %}
-                        <div class="question clearfix">answer-to-watched-question</div>
+                    {% ifequal item.type 'answer' %}
+                        <div class="answer question clearfix">
+                            <div class="avatar left"><a href="{{ item.answer.user.get_absolute_url }}" style="background-image: url('http://www.gravatar.com/avatar/{{ item.answer.user.get_profile.get_gravatar }}.jpg?s=70&amp;d=http://reportingon.com/media/images/avatar.jpg');" title="{{ item.answer.user.username }}"><span>{{ item.answer.user.get_profile.get_score }}</span></a></div>
+                            <div class="meta left">
+                                <div class="answers-number right" title="# of answers + item.question points + answer points">{% get_score item.answer %}</div>
+                                <div class="answer-to title"><span>Answer to:</span> <a href="{{ item.question.get_absolute_url }}">{{ item.question.question|truncatesmart:60 }}</a></div>
+                                <a href="{{ item.question.get_absolute_url }}#answer-{{ item.answer.id }}" class="title">{{ item.answer.comment }}</a>
+                                <div class="tools">
+                                    {% rated item.answer request.user as israted %}
+                                    <a href="/rate/{% get_content_type_id item.answer %}/{{ item.answer.id }}/{{ item.answer.user.id }}" class="good-answer rate {% if not request.user.is_authenticated %}disabled{% endif %} left {% if israted %}rated-good{% endif %}" id="rated-{% get_content_type_id item.answer %}-{{ item.answer.id }}">Good answer</a>
+                                </div>
+                            </div>
+                        </div>
                     {% endifequal %}
                     
-                    {% ifequal item.type 'user-watched-user' %}
-                        <div class="question clearfix">user-watched-user</div>
-                    {% endifequal %}
-                
-                    {% ifequal item.type 'user-watched-beat' %}
-                        <div class="question clearfix">user-watched-beat</div>
-                    {% endifequal %}
+                    {% ifnotequal item.type 'question' %}
+                        {% ifnotequal item.type 'answer' %}
+                            <div class="question clearfix">
+                                <div class="avatar left"><a href="{{ item.watched_user.get_absolute_url }}" style="background-image: url('http://www.gravatar.com/avatar/{{ item.watched_user.get_profile.get_gravatar }}.jpg?s=70&amp;d=http://reportingon.com/media/images/avatar.jpg');" title="{{ item.watched_user.username }}"><span>{{ item.watched_user.get_profile.get_score }}</span></a></div>
+                                <div class="meta left">
+                                    <div class="title">{{ item.description|safe }}</div>
+                                </div>
+                            </div>
+                        {% endifnotequal %}
+                    {% endifnotequal %}
                     
-                    {% ifequal item.type 'user-watched-question' %}
-                        <div class="question clearfix">user-watched-question</div>
-                    {% endifequal %}
-                    
-                    {% ifequal item.type 'user-watched-search' %}
-                        <div class="question clearfix">user-watched-search</div>
-                    {% endifequal %}
-                    
-                    {% ifequal item.type 'user-asked-question' %}
-                        <div class="question clearfix">user-asked-question</div>
-                    {% endifequal %}
-                    
-                    {% ifequal item.type 'user-updated-question' %}
-                        <div class="question clearfix">user-updated-question</div>
-                    {% endifequal %}
-                    
-                    {% ifequal item.type 'user-answered-question' %}
-                        <div class="question clearfix">user-answered-question</div>
-                    {% endifequal %}
 
-										{% ifequal item.type 'new-question-in-watched-beat' %}
-                        <div class="question clearfix">new-question-in-watched-beat</div>
-                    {% endifequal %}
                     
                 {% endfor %}
                 <div class="question-count bottom">

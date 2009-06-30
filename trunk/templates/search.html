@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Search | {{ block.super }}{% endblock %}
+{% block title %}Search{% if query %} for {{ query }}{% endif %} | {{ block.super }}{% endblock %}
 
 {% block feed %}<link rel="alternate" type="application/rss+xml" title="ReportingOn Search: {{ query }}" href="/feeds/search/{{ query }}">{% endblock %}
 

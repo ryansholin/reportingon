@@ -24,7 +24,7 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False, unique=Fal
                     recent_activity.append({ 'description': 'no-profile', 'date': question.created , 'type': 'question', 'id': type + str(obj.object_id), 'question': question })
             
         elif obj.content_type.model == 'question':
-            type = 'user-watched-question'
+            type = 'question'
             description = """%s watching the question &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> started""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Started', obj.object.get_absolute_url(), obj.object.question)
         elif obj.content_type.model == 'savedsearch':
             type = 'user-watched-search'
@@ -70,7 +70,7 @@ def get_recent_activity_for_question(question, sort=False, thirdPerson=False, un
     recent_activity.append({ 'description': """<a href="%s">%s</a> asked &ldquo;<a href="%s">%s</a>&rdquo;""" % (question.author.get_absolute_url(), question.author.username, question.get_absolute_url(), question.question), 'date': question.created, 'type': type, 'id': type + str(question.id),'watched_user': question.author, 'question': question })
     
     # add update if created != modified
-    type = 'user-updated-question'
+    type = 'question'
     if(question.created is not question.modified):
         recent_activity.append({ 'description': """<a href="%s">%s</a> updated a question &ldquo;<a href="%s">%s</a>&rdquo;""" % (question.author.get_absolute_url(), question.author.username, question.get_absolute_url(), question.question), 'date': question.modified, 'type': type, 'id': type + str(question.id),'watched_user': question.author })
         

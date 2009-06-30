@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="ReportingOn User: {{ user.username }}" href="/feeds/users/{{ user.username }}">{% endblock %}
+
 {% load content_type %}
 {% load watched %}
 {% load pagination_tags %}
@@ -48,7 +50,9 @@
                         {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items
                     </div>
 					{% for activity in recent_activity %}
-						<li>{{ activity.description|safe }} <span>{{ activity.date|timesince }} ago</span></li>
+					    {% ifnotequal activity.description 'no-profile' %}
+						    <li>{{ activity.description|safe }} <span>{{ activity.date|timesince }} ago</span></li>
+						{% endifnotequal %}
 					{% endfor %}
 					<div class="question-count">
                         {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items

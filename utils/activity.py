@@ -7,6 +7,7 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False, unique=Fal
     recent_activity = list()
     watched_beats = list(Watched.objects.filter(user=user, content_type__model='tag'))
     watched_questions = list(Watched.objects.filter(user=user, content_type__model='question'))
+    watched_searches = list(Watched.objects.filter(user=user, content_type__model='savedsearch'))
     for obj in Watched.objects.filter(user=user):
         if obj.content_type.model == 'user': # user is watching a user
             type = 'user-watched-user'
@@ -18,7 +19,7 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False, unique=Fal
                         
             # get questions for watched beat
             if obj in watched_beats: 
-                questions = Question.objects.filter(tags__icontains=obj.object.name)[:50] # limit this to something reasonable...
+                questions = Question.objects.filter(tags__icontains=obj.object.name)[:20] # limit this to something reasonable...
                 watched_beats.remove(obj)
                 for question in questions:
                     recent_activity.append({ 'description': 'no-profile', 'date': question.created , 'type': 'question', 'id': 'question' + str(question.id), 'question': question })
@@ -30,6 +31,12 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False, unique=Fal
             type = 'user-watched-search'
             search_url = '/search?query=' + obj.object.query
             description = """%s watching the search &ldquo;<a href="%s">%s</a>&rdquo;""" % ("""<a href="%s">%s</a> started""" % (user.get_absolute_url(), user.username) if thirdPerson else 'Started', search_url, obj.object.query)
+            
+            if obj in watched_searches:
+                raw_results = Question.search.query(obj.object.query)
+                for question in raw_results[0:raw_results.count() if raw_results.count() > 20 else 20]:
+                    recent_activity.append({ 'description': 'no-profile', 'date': question.created , 'type': 'question', 'id': 'question' + str(question.id), 'question': question })
+                
         else:
             type = 'fail'
             watched_user = False

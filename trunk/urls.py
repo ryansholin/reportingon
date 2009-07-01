@@ -11,11 +11,12 @@ feeds = {
     'latest': LatestQuestions,              # /feeds/latest 
     'beat': LatestQuestionsByBeat,          # /feeds/beat/beat terms here
     'search': LatestQuestionsBySearch,      # /feeds/search/search terms go here
-    'questions': LatestAnswersByQuestion,   # /feeds/question/16[/slug-is-optional/]
-    'users': LatestQuestionsByUser,         # /feeds/user/23
+    'questions': LatestAnswersByQuestion,   # /feeds/questions/16[/slug-is-optional/]
+    'users': LatestQuestionsByUser,         # /feeds/users/Pete
 }
 
 urlpatterns = patterns('',
+    (r'^feeds/watched/(?P<username>.*)/?', watched_feed),
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^questions/', include('reportingon.questions.urls')),

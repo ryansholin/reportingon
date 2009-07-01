@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.syndication.feeds import FeedDoesNotExist
 
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
@@ -99,3 +100,10 @@ def beats(request, beat):
         beat = get_object_or_404(Tag, name=beat)
         questions = TaggedItem.objects.get_by_model(Question, beat)
         return render_to_response('beat.html', locals(), context_instance=RequestContext(request))
+
+def watched_feed(request, username):
+    try:
+        watched_items = get_recent_activity_for_user(User.objects.get(username__iexact=username), sort=True, thirdPerson=True, unique=True)[:30]
+    except User.DoesNotExist:
+        raise FeedDoesNotExist
+    return render_to_response('watched_feed.xml', locals(), context_instance=RequestContext(request))

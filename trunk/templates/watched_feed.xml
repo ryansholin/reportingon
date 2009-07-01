@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>ReportingOn: The latest questions from Pete (Pete Karl)</title>
+		<link>http://reportingon.com/users/2</link>
+		<description>The most recent questions asked by Pete</description>
+		<language>en-us</language>
+		<lastBuildDate>{{ now|date:"r" }}</lastBuildDate>
+		{% for item in watched_items %}
+		<item>
+			<title>{{ item.description }}</title>
+			<link>http://reportingon.com/</link>
+			<description>{{ item.description }}</description>
+			<guid>http://reportingon.com/#{{ item.id }}</guid>
+		</item>
+		{% endfor %}
+	</channel>
+</rss>

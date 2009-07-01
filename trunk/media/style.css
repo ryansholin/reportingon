@@ -341,6 +341,44 @@ body a:hover {text-decoration: underline;}
 #twitter_update_list li {color: #3d3d3d; font-size: 16px; font-weight: bold; border-bottom: 1px solid #E5E5E5; margin: 15px 0; padding-bottom: 15px;}
 #twitter_update_list li a {display: inline !important; float: none; font-weight: bold; font-size: 16px;}
 
+/* Sidebar modules */
+.sidebar-module {
+    background-color: #EDEDED;
+    border-radius: 10px;
+    clear: left;
+    float: left;
+    margin-top: 10px;
+    padding: 5px;
+    width: 100%;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+.sidebar-module .inner {
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+.sidebar-module .inner h2 {
+    background-color: #E5E5E5;
+    border-bottom: 1px solid #CFCFCF;
+    color: #3e3e3e;
+    font-size: 22px;
+    padding: 8px;
+    -moz-border-radius-topleft: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -webkit-border-top-right-radius: 5px;
+}
+.sidebar-module .inner .content {
+    background-color: #FFF;
+    padding: 10px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+}
+
 /* Autocomplete tags */
 .ac_results {padding: 0px; border: 1px solid #A6A6A6; background-color: white; overflow: hidden; z-index: 99999;}
 .ac_results ul {width: 100%; list-style-position: outside; list-style: none; padding: 0; margin: 0;}

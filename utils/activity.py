@@ -22,7 +22,8 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False, unique=Fal
                 questions = Question.objects.filter(tags__icontains=obj.object.name)[:20] # limit this to something reasonable...
                 watched_beats.remove(obj)
                 for question in questions:
-                    recent_activity.append({ 'description': 'no-profile', 'date': question.created , 'type': 'question', 'id': 'question' + str(question.id), 'question': question })
+                    description = """A new question from %s was asked: %s""" % (obj.object.name, question)
+                    recent_activity.append({ 'description': description, 'date': question.created , 'type': 'question', 'id': 'question' + str(question.id), 'question': question })
             
         elif obj.content_type.model == 'question':
             type = 'user-watched-question'
@@ -35,7 +36,8 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False, unique=Fal
             if obj in watched_searches:
                 raw_results = Question.search.query(obj.object.query)
                 for question in raw_results[0:raw_results.count() if raw_results.count() > 20 else 20]:
-                    recent_activity.append({ 'description': 'no-profile', 'date': question.created , 'type': 'question', 'id': 'question' + str(question.id), 'question': question })
+                    description = """A new question from your watched search for '%s' was asked: %s""" % (obj.object.query, question)
+                    recent_activity.append({ 'description': description, 'date': question.created , 'type': 'question', 'id': 'question' + str(question.id), 'question': question })
                 
         else:
             type = 'fail'

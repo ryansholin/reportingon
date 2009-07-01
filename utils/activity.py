@@ -21,7 +21,7 @@ def get_recent_activity_for_user(user, sort=False, thirdPerson=False, unique=Fal
                 questions = Question.objects.filter(tags__icontains=obj.object.name)[:50] # limit this to something reasonable...
                 watched_beats.remove(obj)
                 for question in questions:
-                    recent_activity.append({ 'description': 'no-profile', 'date': question.created , 'type': 'question', 'id': type + str(obj.object_id), 'question': question })
+                    recent_activity.append({ 'description': 'no-profile', 'date': question.created , 'type': 'question', 'id': 'question' + str(question.id), 'question': question })
             
         elif obj.content_type.model == 'question':
             type = 'user-watched-question'

@@ -2,6 +2,17 @@
  
 {% block title %}Ask a question | {{ block.super }}{% endblock %}
 
+{% block js %}
+    <script type="text/javascript">
+        $(function() {
+            var data = "{{ tags|join:"," }}".split(",");
+            $("#id_tags").autocomplete(data, {
+                multiple: true,
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block body_styles %} class="new-question"{% endblock %}
  
 {% block content %}

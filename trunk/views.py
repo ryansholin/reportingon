@@ -37,7 +37,7 @@ def home(request):
     watched_activity.sort(key=lambda x:x['date'], reverse=True)
     
     # hard limit on 30
-    watched_activity = watched_activity[:30]
+    watched_activity = watched_activity[:100]
     
     return render_to_response('home-logged-in.html', locals(), context_instance=RequestContext(request))
 

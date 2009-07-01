@@ -56,7 +56,7 @@
                             <div class="meta left">
                                 <div class="answers-number right" title="# of answers + item.question points + answer points">{% get_score item.answer %}</div>
                                 <div class="answer-to title"><span>Answer to:</span> <a href="{{ item.question.get_absolute_url }}">{{ item.question.question|truncatesmart:60 }}</a></div>
-                                <a href="{{ item.question.get_absolute_url }}#answer-{{ item.answer.id }}" class="title">{{ item.answer.comment }}</a>
+                                <a href="{{ item.question.get_absolute_url }}#answer-{{ item.answer.id }}" class="title">{{ item.answer.comment|truncatewords_html:40 }}</a>
                                 <div class="tools">
                                     {% rated item.answer request.user as israted %}
                                     <a href="/rate/{% get_content_type_id item.answer %}/{{ item.answer.id }}/{{ item.answer.user.id }}" class="good-answer rate {% if not request.user.is_authenticated %}disabled{% endif %} left {% if israted %}rated-good{% endif %}" id="rated-{% get_content_type_id item.answer %}-{{ item.answer.id }}">Good answer</a>

@@ -96,6 +96,13 @@ AUTH_PROFILE_MODULE = 'utils.UserProfile'
 
 DATE_FORMAT = 'M d, Y'
 
+# EMAIL SETTINGS
+# EMAIL_HOST=''
+# EMAIL_HOST_USER=''
+# EMAIL_HOST_PASSWORD=''
+# DEFAULT_FROM_EMAIL = ""
+# SERVER_EMAIL = ""
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',

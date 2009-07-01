@@ -14,6 +14,9 @@ from reportingon.rated.models import Rated
 
 from django.contrib.comments.models import Comment
 
+from django.contrib.comments import signals
+from reportingon.signals import *
+
 class Question(models.Model):
     """Question model"""
     
@@ -41,6 +44,8 @@ class Question(models.Model):
     def get_absolute_url(self):
         return "/questions/%d/%s" % (self.id, self.slug)
         
+    signals.comment_was_posted.connect(question_has_new_answer, sender=Comment)
+    
     search = SphinxSearch(
         index ='questions_question',
         weights = {

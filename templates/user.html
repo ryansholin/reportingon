@@ -5,6 +5,7 @@
 {% load content_type %}
 {% load watched %}
 {% load pagination_tags %}
+{% load truncatesmart %}
 
 {% block title %}{% if profile %}My profile{% endif %}{% if not profile %}{{ user.username }}'s profile{% endif %} | {{ block.super }}{% endblock %}
 
@@ -51,7 +52,7 @@
                     </div>
 					{% for activity in recent_activity %}
 					    {% ifnotequal activity.description 'no-profile' %}
-						    <li>{{ activity.description|safe }} <span>{{ activity.date|timesince }} ago</span></li>
+						    <li>{{ activity.description|safe|truncatewords_html:40 }} <span>{{ activity.date|timesince }} ago</span></li>
 						{% endifnotequal %}
 					{% endfor %}
 					<div class="question-count">

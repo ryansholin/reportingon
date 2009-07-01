@@ -8,6 +8,8 @@ from django.template import RequestContext
 from forms import QuestionForm
 from models import Question
 
+from tagging.models import Tag
+
 def list_questions(request):
     questions = Question.objects.all()
     return render_to_response('list-questions.html', locals(), context_instance=RequestContext(request))
@@ -30,6 +32,8 @@ def new_question(request):
             return HttpResponseRedirect(reverse(view_question, args=[question.pk, question.slug]))
     else:
         form = QuestionForm()
+    
+    tags = Tag.objects.all()
     
     return render_to_response('new-question.html', locals(), context_instance=RequestContext(request))
 

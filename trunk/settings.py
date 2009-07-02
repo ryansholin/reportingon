@@ -59,7 +59,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.request',
     'django_authopenid.context_processors.authopenid',
-    'reportingon.context_processors.avatar_meta',
+    'reportingon.context_processors.global_resources',
 )
 
 # List of callables that know how to import templates from various sources.

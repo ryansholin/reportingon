@@ -333,7 +333,7 @@ body a:hover {text-decoration: underline;}
 .profile-sidebar h2 {margin-bottom: 10px;}
 .profile-sidebar ul {margin-bottom: 30px;}
 .profile-sidebar ul:last-child {margin-bottom: 0;}
-.profile-sidebar li a {display: block; float: left; font-size: 18px; font-weight: bold; padding: 1px 0; width: 100%;}
+.profile-sidebar li {display: block; float: left; font-size: 18px; font-weight: bold; padding: 1px 0; width: 100%;}
 .activity {margin-top: 35px; clear: left;}
 .activity li {background: transparent url('/media/images/activity-bullet.gif') 0 5px no-repeat; font-size: 18px; font-weight: bold; margin: 15px 0; padding-left: 32px;}
 .activity li:hover {background-position: 0 -82px;}

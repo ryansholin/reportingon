@@ -57,7 +57,7 @@
                 {% if request.user.is_authenticated %}
                     <div id="new-answer" class="clearfix">
                         {% get_comment_form for question as form %}
-                        <form action="/answers/post/" method="post" id="new-answer-form">
+                        <form action="{% comment_form_target %}" method="post" id="new-answer-form">
                             <div class="fields">
                                 <fieldset>
                                     <legend>Your answer</legend>

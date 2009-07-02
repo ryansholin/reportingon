@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 
 from reportingon.rated.models import Rated
@@ -24,7 +24,19 @@ def rate(request, content_type_id, object_id, rated_user_id):
         )
         rated.save()
         data = {'object_id': object_id, 'state': 'rated', 'content_type_id': content_type_id}
+        
+        if 'HTTP_REFERER' in request.META:
+            if 'user/signin' in request.META['HTTP_REFERER']:
+                # User has just logged in, return to object.
+                return HttpResponseRedirect(rated.object.get_absolute_url())
+        
         return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')
         
     data = {'object_id': object_id, 'state': 'unrated', 'content_type_id': content_type_id}
+    
+    if 'HTTP_REFERER' in request.META:
+        if 'user/signin' in request.META['HTTP_REFERER']:
+            # User has just logged in, return to object.
+            return HttpResponseRedirect(CurrentlyRated.object.get_absolute_url())
+    
     return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')

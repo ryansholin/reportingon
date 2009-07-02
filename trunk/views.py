@@ -21,7 +21,7 @@ from utils.activity import * # these are utils that collect activity
 
 def home(request):
     if not request.user.is_authenticated():
-        questions = Question.objects.all()[:2]
+        questions = Question.objects.all()[:3]
         return render_to_response('home-not-logged-in.html', locals(), context_instance=RequestContext(request))
         
     watched = Watched.objects.filter(user=request.user, status=1)

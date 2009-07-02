@@ -248,7 +248,7 @@ body a:hover {text-decoration: underline;}
 .question a.title:hover {color: #49B2E8;}
 .question .answers {color: #c6c6c6; display: block;}
 .question .tools, .answer .tools {clear: left; margin-top: 10px;}
-.question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px;}
+.question .answers-number {color: #eaeaea; font-size: 60px; font-weight: bold; line-height: 40px; margin-left: 40px; margin-bottom: 20px;}
 .question .posted, .answer .posted {color: #9b9b9b; float: left; font-family: Arial; font-size: 11px; margin: 4px 0 0 10px; width: 270px;}
 .question .good-question, .answer .good-answer, .watch {
     background: #E5E5E5 url('/media/images/plus.gif') 5px center no-repeat;

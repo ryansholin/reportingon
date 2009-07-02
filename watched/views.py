@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 
 from reportingon.watched.models import Watched, SavedSearch
@@ -30,6 +30,12 @@ def watch(request, content_type_id, object_id):
         return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')
 
     data = {'object_id': object_id, 'status': CurrentlyWatched.status, 'content_type_id': content_type_id}
+    
+    if 'HTTP_REFERER' in request.META:
+        if 'user/signin' in request.META['HTTP_REFERER']:
+            # User has just logged in, return to object.
+            return HttpResponseRedirect(CurrentlyWatched.object.get_absolute_url())
+
     return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')
 
 @login_required

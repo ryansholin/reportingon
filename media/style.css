@@ -154,6 +154,7 @@ body a:hover {text-decoration: underline;}
 #login-page .submit {margin-top: 5px;}
 #openid-badge {margin-right: 7px; vertical-align: -2px;}
 .login-account {border-right: 1px solid #BFBFBF; margin-right: 50px; padding-right: 50px;}
+.supplement {clear: left; float: left; text-align: center; width: 100%; margin: 40px auto;}
 
 /* Footer */
 #footer {background-color: #EAEAEA; padding: 25px 0;}
@@ -209,8 +210,17 @@ body a:hover {text-decoration: underline;}
 .question, .answer {border-top: 1px solid #E5E5E5; padding: 15px 0; width: 625px;}
 .avatar {width: 85px;}
 .avatar img {float: left;}
-.avatar a, #profile-image {display: block; height: 70px; position: relative; width: 70px; -moz-background-size: 70px 70px; -moz-border-radius: 5px; -webkit-background-size: 70px 70px; -webkit-border-radius: 5px;}
-#profile-image {height: 165px; width: 165px;}
+.avatar a, #profile-image {
+    display: block;
+    height: 70px;
+    position: relative;
+    width: 70px;
+    -moz-background-size: 70px 70px;
+    -moz-border-radius: 5px;
+    -webkit-background-size: 70px 70px;
+    -webkit-border-radius: 5px;
+}
+#profile-image {height: 165px; width: 165px; -moz-background-size: 165px 165px; -webkit-background-size: 165px 165px;}
 .avatar a span, #profile-image span {
     background-color: #ec9b44;
     bottom: 0;

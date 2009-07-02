@@ -5,6 +5,7 @@
 {% load content_type %}
 {% load watched %}
 {% load at_reply %}
+{% load truncatesmart %}
 
 {% for question in questions %}
     {% get_comment_count for question as comment_count %}
@@ -13,7 +14,7 @@
         <div class="avatar left"><a href="{{ question.author.get_absolute_url }}" style="background-image: url('http://www.gravatar.com/avatar/{{ question.author.get_profile.get_gravatar }}.jpg?s=70&amp;d=http://reportingon.com/media/images/avatar.jpg');" title="{{ question.author.username }}"><span>{{ question.author.get_profile.get_score }}</span></a></div>
         <div class="meta left">
             <div class="answers-number right" title="# of answers + question points + answer points">{{ question.get_score }}</div>
-            <a href="{{ question.get_absolute_url }}" class="title">{{ question.question }}</a>
+            <a href="{{ question.get_absolute_url }}" class="title">{{ question.question|truncatesmart:300 }}</a>
             <div class="answers">{{ comment_count }} answer{% ifnotequal comment_count 1 %}s{% endifnotequal %}</div>
             <div class="tools">
                 {% rated question request.user as israted %}

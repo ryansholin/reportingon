@@ -67,10 +67,10 @@
         <div class="profile-sidebar">
             <h2>Stats</h2>
             <ul class="clearfix">
-                <li><a href="#">{{ user_questions }} Question{% ifnotequal user_questions 1 %}s{% endifnotequal %}</a></li>
-                <li><a href="#">{{ user_answers }} Answer{% ifnotequal user_answers 1 %}s{% endifnotequal %}</a></li>
-                <li><a href="#">{{ user_liked_questions }} Liked Question{% ifnotequal user_liked_questions 1 %}s{% endifnotequal %}</a></li>
-                <li><a href="#">{{ user_liked_answers }} Liked Answer{% ifnotequal user_liked_answers 1 %}s{% endifnotequal %}</a></li>
+                <li>{{ user_questions }} Question{% ifnotequal user_questions 1 %}s{% endifnotequal %}</li>
+                <li>{{ user_answers }} Answer{% ifnotequal user_answers 1 %}s{% endifnotequal %}</li>
+                <li>{{ user_liked_questions }} Liked Question{% ifnotequal user_liked_questions 1 %}s{% endifnotequal %}</li>
+                <li>{{ user_liked_answers }} Liked Answer{% ifnotequal user_liked_answers 1 %}s{% endifnotequal %}</li>
             </ul>
             {% if user.get_profile.twitter %}
                 <h2>Latest <a href="http://twitter.com/{{ user.get_profile.twitter }}">tweets</a></h2>

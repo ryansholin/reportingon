@@ -79,9 +79,9 @@ def get_recent_activity_for_question(question, sort=False, thirdPerson=False, un
     recent_activity.append({ 'description': """<a href="%s">%s</a> asked &ldquo;<a href="%s">%s</a>&rdquo;""" % (question.author.get_absolute_url(), question.author.username, question.get_absolute_url(), question.question), 'date': question.created, 'type': type, 'id': type + str(question.id),'watched_user': question.author, 'question': question })
     
     # add update if created != modified
-    type = 'user-updated-question'
-    if(question.created is not question.modified):
-        recent_activity.append({ 'description': """<a href="%s">%s</a> updated a question &ldquo;<a href="%s">%s</a>&rdquo;""" % (question.author.get_absolute_url(), question.author.username, question.get_absolute_url(), question.question), 'date': question.modified, 'type': type, 'id': type + str(question.id),'watched_user': question.author })
+    # type = 'user-updated-question'
+    #     if(question.created is not question.modified):
+    #         recent_activity.append({ 'description': """<a href="%s">%s</a> updated a question &ldquo;<a href="%s">%s</a>&rdquo;""" % (question.author.get_absolute_url(), question.author.username, question.get_absolute_url(), question.question), 'date': question.modified, 'type': type, 'id': type + str(question.id),'watched_user': question.author })
         
     for answer in Comment.objects.filter(object_pk=question.id):
         if answer.user_id:

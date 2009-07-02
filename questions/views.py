@@ -8,6 +8,8 @@ from django.template import RequestContext
 from forms import QuestionForm
 from models import Question
 
+from django.shortcuts import get_object_or_404
+
 from tagging.models import Tag
 
 def list_questions(request):
@@ -15,7 +17,7 @@ def list_questions(request):
     return render_to_response('list-questions.html', locals(), context_instance=RequestContext(request))
 
 def view_question(request, qid):
-    question = Question.objects.get(id__exact=qid)
+    question = get_object_or_404(Question, id__exact=qid)
     if 'c' in request.GET:
         return HttpResponseRedirect(question.get_absolute_url() + '#answer-' + request.GET['c'])
     question.content_type = ContentType.objects.get_for_model(Question)

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block feed %}<link rel="alternate" type="application/rss+xml" title="ReportingOn Watched Feed" href="/feeds/watched/{{ request.user.username }}">{% endblock %}
+
 {% block title %}Watched | {{ block.super }}{% endblock %}
 
 {% load pagination_tags %}

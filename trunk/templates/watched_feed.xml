@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
 	<channel>
-		<title>ReportingOn: The latest questions from Pete (Pete Karl)</title>
-		<link>http://reportingon.com/users/2</link>
-		<description>The most recent questions asked by Pete</description>
+		<title>ReportingOn: {{ username }}'s watched feed</title>
+		<link>http://reportingon.com/users/{{ username }}</link>
+		<description>The most recent activity from {{ username }}'s watched feed</description>
 		<language>en-us</language>
 		<lastBuildDate>{{ now|date:"r" }}</lastBuildDate>
-		{% for item in watched_items %}
+		
+		{% for item in watched_activity %}
+		
 		<item>
 			<title>{{ item.description }}</title>
-			<link>http://reportingon.com/</link>
+			
+			{% ifequal item.type 'question' %}
+				<link>http://reportingon.com/questions/{{ item.question.id }}/{{ item.question.slug }}?ref=rss</link>
+			{% endifequal %}
+			
+			{% ifequal item.type 'user' %}
+				<link>http://reportingon.com/users/{{ item.user.id }}/{{ item.user.slug }}?ref=rss</link>
+			{% endifequal %}
+			
+			{% ifnotequal item.type 'question' %}
+				{% ifnotequal item.type 'user' %}
+					<link>http://reportingon.com/?ref=rss&item={{ item.id }}</link>
+				{% endifnotequal %}
+			{% endifnotequal %}
+			
 			<description>{{ item.description }}</description>
-			<guid>http://reportingon.com/#{{ item.id }}</guid>
+			<guid>http://reportingon.com/?ref=rss&item={{ item.id }}</guid>
 		</item>
+		
 		{% endfor %}
+		
 	</channel>
 </rss>

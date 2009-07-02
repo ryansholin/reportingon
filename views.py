@@ -102,8 +102,29 @@ def beats(request, beat):
         return render_to_response('beat.html', locals(), context_instance=RequestContext(request))
 
 def watched_feed(request, username):
+    """
+        This is essentially a duplicate of the code found in home()
+        
+        This functionality should be factored out to activity.py - PK
+    """
     try:
-        watched_items = get_recent_activity_for_user(User.objects.get(username__iexact=username), sort=True, thirdPerson=True, unique=True)[:30]
+        user = User.objects.get(username__iexact=username)
+        watched = Watched.objects.filter(user=user, status=1)
+        watched_activity = list()
+        for obj in watched:
+            if obj.content_type.model == 'user':
+                watched_user = User.objects.get(id=obj.object_id)
+                if user is not watched_user:
+                    watched_activity.extend(get_recent_activity_for_user(watched_user, thirdPerson=True)) # don't sort, use 3rd person
+            elif obj.content_type.model == 'question':
+                watched_activity.extend(get_recent_activity_for_question(Question.objects.get(id=obj.object_id)))
+
+        watched_activity = uniqueify(watched_activity, lambda x:x['id'])
+        watched_activity.sort(key=lambda x:x['date'], reverse=True)
+
+        # hard limit on 30
+        watched_activity = watched_activity[:30]
+        
     except User.DoesNotExist:
         raise FeedDoesNotExist
     return render_to_response('watched_feed.xml', locals(), context_instance=RequestContext(request))

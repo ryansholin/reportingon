@@ -1,0 +1,10 @@
+<div class="sidebar-module">
+    <div class="inner">
+        <h2><img src="/media/images/sidebar-new.png" alt="Latest questions" title="Latest questions">Latest <a href="/questions">questions</a></h2>
+        <ul id="latest-questions">
+            {% for question in latest_questions %}
+                <li class="{% cycle 'odd' 'even' %}"><a href="{{ question.get_absolute_url }}">{{ question|truncatewords:16 }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

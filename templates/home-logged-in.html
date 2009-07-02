@@ -55,7 +55,7 @@
                             <div class="avatar left"><a href="{{ item.answer.user.get_absolute_url }}" style="background-image: url('http://www.gravatar.com/avatar/{{ item.answer.user.get_profile.get_gravatar }}.jpg?s=70&amp;d=http://reportingon.com/media/images/avatar.jpg');" title="{{ item.answer.user.username }}"><span>{{ item.answer.user.get_profile.get_score }}</span></a></div>
                             <div class="meta left">
                                 <div class="answers-number right" title="# of answers + item.question points + answer points">{% get_score item.answer %}</div>
-                                <div class="answer-to title"><span>Answer to:</span> <a href="{{ item.question.get_absolute_url }}">{{ item.question.question|truncatesmart:60 }}</a></div>
+                                <div class="answer-to title"><span>Answer to:</span> <a href="{{ item.question.get_absolute_url }}">{{ item.question.question|truncatesmart:55 }}</a></div>
                                 <a href="{{ item.question.get_absolute_url }}#answer-{{ item.answer.id }}" class="title">{{ item.answer.comment|truncatewords_html:40 }}</a>
                                 <div class="tools">
                                     {% rated item.answer request.user as israted %}
@@ -75,9 +75,7 @@
                             </div>
                         {% endifnotequal %}
                     {% endifnotequal %}
-                    
 
-                    
                 {% endfor %}
                 <div class="question-count bottom">
                     {% if page_obj.has_next or page_obj.has_previous %}<div class="pages right">{% paginate %}</div>{% endif %}showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }} items
@@ -87,17 +85,7 @@
     </div>
     <div id="content-right">
         {% include "includes/ask-a-question.html" %}
-        <div class="sidebar-module">
-            <div class="inner">
-                <h2>Latest questions</h2>
-                <div class="content">content</div>
-            </div>
-        </div>
-        <div class="sidebar-module">
-            <div class="inner">
-                <h2>Popular beats</h2>
-                <div class="content">content</div>
-            </div>
-        </div>
+        {% include "includes/latest-questions.html" %}
+        {% include "includes/popular-beats.html" %}
     </div>
 {% endblock %}

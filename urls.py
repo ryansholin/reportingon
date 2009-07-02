@@ -7,6 +7,8 @@ from reportingon.feeds import LatestQuestions, LatestQuestionsByBeat, LatestQues
 
 admin.autodiscover()
 
+import useradmin
+
 feeds = {
     'latest': LatestQuestions,              # /feeds/latest 
     'beat': LatestQuestionsByBeat,          # /feeds/beat/beat terms here

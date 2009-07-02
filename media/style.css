@@ -370,14 +370,26 @@ body a:hover {text-decoration: underline;}
     -moz-border-radius-topright: 5px;
     -webkit-border-top-right-radius: 5px;
 }
-.sidebar-module .inner .content {
+.sidebar-module .inner h2 img {float: left; margin-right: 8px;}
+.sidebar-module .inner ul {
     background-color: #FFF;
-    padding: 10px;
     -moz-border-radius-bottomleft: 5px;
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomright: 5px;
     -webkit-border-bottom-right-radius: 5px;
 }
+.sidebar-module .inner li:last-child {
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+}
+.sidebar-module .inner li a {padding: 10px;}
+.sidebar-module .inner #latest-questions li a {padding: 10px 10px 10px 32px;}
+.sidebar-module .inner li a {color: #3e3e3e; display: block; font-weight: bold;}
+.sidebar-module .inner li a:hover {color: #07A4E7; text-decoration: none;}
+.sidebar-module .inner li.even {background-color: #F4F4F4 !important;}
+.sidebar-module .inner #latest-questions li {background: transparent url('/media/images/question-icon.png') 10px 14px no-repeat;}
 
 /* Autocomplete tags */
 .ac_results {padding: 0px; border: 1px solid #A6A6A6; background-color: white; overflow: hidden; z-index: 99999;}

@@ -9,6 +9,13 @@ from reportingon.rated.models import Rated
 @login_required
 def rate(request, content_type_id, object_id, rated_user_id):
     
+    rated_user = User.objects.get(id__exact=rated_user_id)
+    
+    # Prevent users from voting on their own items
+    if request.user = rated_user:
+        data = {'object_id': object_id, 'state': 'unrated', 'content_type_id': content_type_id}
+        return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')
+    
     content_type = ContentType.objects.get(id__exact=content_type_id)
     
     # Prevent duplicates
@@ -20,7 +27,7 @@ def rate(request, content_type_id, object_id, rated_user_id):
             content_type = content_type,
             object_id = object_id,
             user = request.user,
-            rated_user = User.objects.get(id__exact=rated_user_id)
+            rated_user = rated_user
         )
         rated.save()
         data = {'object_id': object_id, 'state': 'rated', 'content_type_id': content_type_id}

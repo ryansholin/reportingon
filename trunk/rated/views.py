@@ -12,7 +12,7 @@ def rate(request, content_type_id, object_id, rated_user_id):
     rated_user = User.objects.get(id__exact=rated_user_id)
     
     # Prevent users from voting on their own items
-    if request.user = rated_user:
+    if request.user == rated_user:
         data = {'object_id': object_id, 'state': 'unrated', 'content_type_id': content_type_id}
         return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')
     

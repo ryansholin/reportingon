@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     (r'^users/?(?P<user>[^/]+)?/?(?P<edit>[^/]+)?', user),
     (r'^admin/(.*)', admin.site.root),
     (r'^search/(.*)', search),
+    (r'^robots.txt$', robotstxt_404),
     (r'^/?$', home),
 )
 

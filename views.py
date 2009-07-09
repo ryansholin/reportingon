@@ -4,7 +4,7 @@ from django.contrib.syndication.feeds import FeedDoesNotExist
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
@@ -127,3 +127,6 @@ def watched_feed(request, username):
     except User.DoesNotExist:
         raise FeedDoesNotExist
     return render_to_response('watched_feed.xml', locals(), context_instance=RequestContext(request))
+    
+def robotstxt_404(request):
+    raise Http404
